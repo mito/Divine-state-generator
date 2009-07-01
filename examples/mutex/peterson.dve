@@ -1,0 +1,25 @@
+
+byte turn = 1;
+byte want1 = 0, want2=0;
+
+process P_0 {
+state NC, q1, wait, CS;
+init NC;
+trans 
+  NC -> q1 { effect want1 = 1; },
+  q1 -> wait { effect turn = 1;},
+  wait -> CS { guard want2 == 0 || turn == 2; },
+  CS -> NC { effect want1 = 0; };
+}
+
+process P_1 {
+state NC, q1, wait, CS;
+init NC;
+trans 
+  NC -> q1 { effect want2 = 1; },
+  q1 -> wait { effect turn = 2;},
+  wait -> CS { guard want1 == 0 || turn == 1; },
+  CS -> NC { effect want2 = 0; };
+}
+
+system async;

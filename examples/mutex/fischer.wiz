@@ -1,0 +1,15 @@
+#FILE
+fischer.mdve
+#PARAMETERS
+N=3
+//N in 5,6; K1 = 3; K2 in  3, 4;
+//N=6;K1=2; K2=3;
+//N = 3; MAX in 4,6,8,10;
+#OPTIONS
+//show trails P_0.state P_1.state P_2.state
+#PROPOSITIONS
+c	state	in_critical > 1
+#COMMANDS
+//reachability size c
+//generate
+simulation

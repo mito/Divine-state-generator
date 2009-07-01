@@ -1,0 +1,34 @@
+
+default(N,3)
+default(LOOPS,0)
+
+default(MAX,5) // artifical constrain
+
+bool choosing[N];
+byte number[N];
+byte in_critical=0;
+
+byte active = 0;
+byte waiting[N] = {myloop(x,0,decr(N),`0',`,') };
+
+define(P, `process P_$1 {
+byte j, max;
+state NCS, choose, for_loop, wait, CS;
+init NCS;
+trans
+ ifelse(LOOPS, 1, `NCS -> NCS {effect active = $1; },',`')
+ NCS -> choose { effect choosing[$1] = true, j=0, max=0, active = $1, waiting[$1] = 1; },
+ choose -> choose { guard j<N and number[j]>max; effect max = number[j], j = j +1, active = $1;},
+ choose -> choose { guard j<N and number[j]<=max; effect j = j+1, active = $1;},
+ choose -> for_loop { guard j == N and max < MAX; effect number[$1] = max + 1, j = 0, choosing[$1] = false, active = $1; }, 
+ for_loop -> wait { guard j<N and choosing[j]==false; effect active = $1; },
+ wait -> for_loop { guard number[j] == 0 or (number[j] > number[$1]) or
+			(number[j] == number[$1] and $1 <= j); effect j= j+1, active = $1;},
+ for_loop -> CS {guard j==N; effect in_critical = in_critical+1, active = $1, waiting[$1] = 0;},
+ CS -> NCS { effect number[$1]=0, in_critical = in_critical-1, active = $1;};
+}
+')
+
+forloop(i,0,decr(N), `P(i)')
+
+system async;

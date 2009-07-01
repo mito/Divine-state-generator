@@ -1,0 +1,41 @@
+
+default(N,4)
+
+byte time;
+
+define(CAM_busy, (myloop(i,0,decr(N),` lup`'i.load_data',`|')))
+
+process Timer {
+state ready;
+init ready;
+trans
+ ready -> ready {guard time <N-2; effect time = time +1; },
+ ready -> ready {guard time ==N-1; effect time = 0; };
+}
+
+define(P, `process lup$1 {
+state sleep, wait, load_data, latency1, latency2, comp;
+init sleep;
+trans
+ sleep -> sleep {},
+ sleep -> load_data {guard time == $1 and not CAM_busy; },
+ sleep -> wait {guard time == $1 and CAM_busy; },
+ wait -> wait {guard time != $1 or CAM_busy; },
+ wait -> load_data {guard time == $1 and not CAM_busy; },
+ load_data -> load_data {guard time != $1; },
+ load_data -> latency1 {guard time == $1; },
+ latency1 -> latency1 {guard time != $1; },
+ latency1 -> latency2 {guard time == $1; },
+ latency2 -> latency2 {guard time != $1; },
+ latency2 -> comp {guard time == $1; },
+ comp -> comp {},
+ comp -> sleep {guard time == $1; },
+ comp -> load_data {guard time == $1 and not CAM_busy; },
+ comp -> wait {guard time == $1 and CAM_busy; };
+}
+
+')
+
+forloop(i,0,decr(N), `P(i)')
+
+system sync;

@@ -1,0 +1,41 @@
+Atomic propositions:
+--------------------
+#define only_one_crossing_train (Train_1.Cross + Train_2.Cross + Train_3.Cross + Train_4.Cross <= 1)
+#define occ (Gate.Occ)
+#define t1a (Train_1.Appr)
+#define t2a (Train_2.Appr)
+#define t3a (Train_3.Appr)
+#define t4a (Train_4.Appr)
+#define t1c (Train_1.Cross)
+#define t2c (Train_2.Cross)
+#define t3c (Train_3.Cross)
+#define t4c (Train_4.Cross)
+#define t1s (Train_2.Stop)
+#define t2s (Train_2.Stop)
+#define t3s (Train_3.Stop)
+#define t4s (Train_4.Stop)
+DiVinE is not accepting:
+define last_value_in_queue_is_zero (IntQueue.list[N-1] == 0)
+
+
+LTL formulas:
+-------------
+
+(1) There is never more than one train crossing the bridge (at any time instance).
+#property G(only_one_crossing_train)
+
+(2) Train 1 can cross bridge while Train 2, 3 & 4 are waiting to cross.
+This property should be true for at least 4 trains (parameter have to be N>4).
+#property G(F(t1c))
+
+(3) Gate can receive (and store in queue) messages from approaching trains.
+#property (F occ)
+
+(4) Whenever a train approaches the bridge, it will eventually cross.
+(Only for first four necessary trains.)
+#property G(t1a -> F t1c) && G(t2a -> F t2c) && G(t3a -> F t3c) && G(t4a -> F t4c) 
+
+( ) There can never be N elements in the queue (thus the array will not overflow).
+DiVinE is not accepting:
+property G(last_value_in_queue_is_zero)
+

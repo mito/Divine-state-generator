@@ -1,0 +1,16 @@
+
+ Cache coherence protocol
+
+my own model
+inspired by snoopy and article 'Verification of cache coherence protocols.... ' (tak nejak podobne)
+
+Neni dodelan -- hlasi mi to chybu, jenze protipriklad ma 317 stavu, takze nevim
+
+Parameters:
+N = number of caches
+Lines = number of lines in a cache
+CHECK (0/1) = with value 1 includes into the model some additional variables, which enable checking of LTL properties
+
+Size:
+N=2, Lines =2 or N=3, Lines=1 reasonable (approx 20.000)
+larger values -- huge

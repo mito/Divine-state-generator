@@ -1,0 +1,7 @@
+{
+{ F (a && b && c && d) }
+a := soldier_1.right;
+b := soldier_2.right;
+c := soldier_3.right;
+d := soldier_4.right;
+}

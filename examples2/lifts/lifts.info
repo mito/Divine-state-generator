@@ -1,0 +1,38 @@
+
+Source:
+
+Analysis of a distributed system for lifting trucks; J.F. Groote; J. Pang; A.G. Wouters; 2001, SEN-R0111, ISSN 1386-369X
+
+(http://db.cwi.nl/rapporten/abstract.php?abstractnr=1069)
+
+Description:
+ The system consists of an arbitrary number of lifts. Each lift supports one wheel of a vehicle. The system is operated by means of buttons on the lifts. Lifts are connected by a bus. The model describes the startup phase and the up/down synchronization mechanism.
+
+Parameters:
+N = number of lifts
+ENV = environment
+	0 = simple environment with just three pressed buttons
+	1 = environment with just one press of set_ref button and arbitrary combination of up/down buttons
+	2 = general environment
+
+State space size info:
+
+N = 2 ... small
+N = 3 ... approx 10^5
+N = 4 ... approx 10^6
+
+(ENV 0 < ENV 1 < ENV 2)
+
+Formulas:
+
+#property (GF pressedup_0) -> (GF moveup)
+satisfied only for ENV=0
+
+#property G (pressedup_0 -> F moveup)
+not satisfied; nice counterexample for ENV=0 (for others there is a trivial cycle)
+
+#property  ((! moveup) U pressedup_0) || G (! moveup)
+not satisfied
+
+#property  ((! moveup) U (myloop(x,0,decr(N),`pressedup_`'x',` || '))) || G (! moveup)
+satisfied

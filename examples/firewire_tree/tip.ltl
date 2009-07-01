@@ -1,0 +1,14 @@
+{ only one process will be elected (fixed for proc 1)
+{ G (e -> G e) }
+e := elected == 1;
+}
+
+{ leader will be elected ... problem with N
+{ F l }
+l := elected != 3;
+}
+
+{
+{ GF (! w) }
+w := Node_1.wait_for_request;
+}

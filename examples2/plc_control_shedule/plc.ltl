@@ -1,0 +1,18 @@
+Atomic propositions
+-------------------
+#define b3sol	(B3 == sol70C)
+#define b3empty	(B3 == cempty)
+#define end	(time>=maxtime)
+#define nrbatches	(batches<5)
+
+Properties
+----------
+(1) container B3 is infinitely often full and infinitely often empty
+#property GF(b3sol || end) && GF(b3empty || end)
+
+(2) number of manufactured batches (from B3 to B4)
+#property G(nrbatches)
+
+(3) the time is still progressing
+#property Fend
+

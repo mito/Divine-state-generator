@@ -1,0 +1,46 @@
+
+Konvence:
+- v kazdem adresari jenom jedna vec (s vyjimkou nejakych toy veci, jako puzzles)
+- model v souboru .dve ci .mdve
+- vlastnosti dosazitelnost .reach
+- vlastnosti LTL .ltl
+- nejlepe nejaky obrazek modelu... 
+- Readme soubor popisujici model (kde se vzal apod), vlastnosti (a jestli jsou splneny ci ne), parametry a pripadne vysledky verifikace, srovnani s jin. tooly, poznamky o tom jak zavisi velikost stavoveho prostoru na parametrech apod.
+
+TODO:
+- vseobecne dopsat LTL vlastnosti!!
+
+soubory s priponou .mdve jsou obecne napsane, je potreba je projet preprocesorem m4, zpusob volani:
+preprocessor file.mdve -Dpar=val
+
+
+TOY priklady:
+------------
+
+- mutex:  OK, potr. Fair
+
+- phils:  OK, potr. Fair
+
+- protocols: dopsat vlastnosti
+
+- puzzles: dopsat vlastnosti
+
+- elevator: dodelat dalsi strategie, potrebuje Fair
+
+- miscellaneous 
+
+- test 
+
+
+Male case studies:
+-----------------
+
+- cambridge (Radek); dodelat 
+
+- iprotocol (Jitka): drobne zmeny dod.;
+
+- msmie (Radek)
+
+- resistance (Krata)
+
+

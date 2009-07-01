@@ -1,0 +1,6 @@
+{ pokud neco zapisu,tak pristi cteni bude spravny
+{ G (write1at0 -> ( write0at0 R ( ! read0at0))) }
+write1at0 := (written_line == 0 && written_value == 1);
+write0at0 := (written_line == 0 && written_value == 0);
+read0at0 := (read_line == 0 && read_value == 0);
+}

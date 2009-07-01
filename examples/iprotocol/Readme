@@ -1,0 +1,36 @@
+Popis i-protokolu viz ./iprotocol_description.ps.
+Dal¹í podrobnosti a odkazy se dají najít v mé diplomce
+(Jitka ®ídková). 
+
+Nastavitelné parametry jsou SEQ (kolik èísel se pou¾ívá pro
+èíslování=rozli¹ování paketù) a W (velikost okna). Musí platit
+SEQ > W/2. Slo¾itost roste exponenciálnì vzhledem k SEQ.
+Parametry se musí nastavit jednak nahoøe a pak je¹tì v definici
+polí "recbuf" a "nakd" (sna¾ila jsem se pou¾ít makro, ale zatím
+nefunguje).
+Radek doplneni:  verze .mdve jiz berou parametry
+
+--
+
+Verze iprotocol*_bad by mìly obsahovat livelock, verze iprotocol*_good
+by livelock obsahovat nemìly. Proto¾e nehrajeme na vnitøní akce, jde
+v podstatì o vlastnost
+
+  AG EF < Konzument-nìco-zkonzumuje || Producent-nìco-vyprodukuje>
+
+Není to nijak otestované, proto¾e je¹tì není hotová CTL. V LTL ( tzn. jako
+<vsechno-co-se-má-chovat-férovì-to-taky-dìlá> ==>
+<nìco-se-konzumuje-nebo-produkuje> ) se mi tuto vlastnost nepodaøilo nìjak
+rozumnì vyjádøit (ale nezkou¹ela jsem to pøíli¹ dlouho). 
+
+--
+
+Ve verzích iprotocol2* je pozmìnìná definice Konzumenta tak, ¾e je 
+nucen naèítat zprávy ve správném poøadí, a to fixnì pro SEQ=4. To by
+se mohlo hodit pro vyjádøení podmínky na korektnost protokolu (tzn. ¾e 
+zprávy jsou doruèované postupnì). Pøi zmìnì SEQ je ale potøeba Konzumenta
+pøepsat.
+ 
+
+
+

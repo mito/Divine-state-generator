@@ -1,0 +1,18 @@
+#FILE
+protocols.mdve
+#PARAMETERS
+Strategy in 0,1,2,4;
+//Strategy=1;
+Strategy in 0, 1; B = 2;
+#OPTIONS
+//show trails	Producer.state Sender.state	Receiver.state	Consumer.state
+#PROPOSITIONS
+consume0	state	Consumer.consume0
+consume1	state	Consumer.consume1
+produce0	state	Producer.produce0
+produce1	state	Producer.produce1
+#COMMANDS
+reachability all
+LTL GF ( consume0 ||  consume1)
+// neni pravda, ze by jako prvni byla vyprodukovana 0 a jako prvni byla zkonzumovana 1
+LTL !((!produce1 U produce0) && (!consume0 U consume1))

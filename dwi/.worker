@@ -1,0 +1,25 @@
+#!/bin/sh
+date > started
+
+mkdir -p work
+
+while ! test -f finished; do
+    sleep 1;
+    for i in `seq 0 9`; do for j in `seq 0 9`; do
+        test -f work/algorithm.$i$j && head -n4 \
+            work/algorithm.$i$j > algorithm.$i$j && \
+        tail -n4 work/algorithm.$i$j | egrep -v '^#' >> algorithm.$i$j;
+    done; done;
+done &
+# run divine.
+ssh  mpirun -machinefile /home/morszag/Desktop/divine-cluster-0.8.2/dwi/machinefile -np 1   -X /home/morszag/Desktop/divine-cluster-0.8.2/dwi/work/algorithm -S -L -r -t -c /home/morszag/Desktop/divine-cluster-0.8.2/dwi//model > algorithm-stdout 2> algorithm-stderr
+cp -f work/algorithm.report algorithm.report
+if test -e work/algorithm.trail && test -e work/algorithm.ce_states; then
+     divine.code_positions work/algorithm.trail /model.dve algorithm.cetrace
+     divine.reformat_ce_states work/algorithm.ce_states algorithm.cestates
+else
+     echo "### NO COUNTEREXAMPLE ###" > algorithm.cetrace 
+     echo "" > algorithm.cestates
+fi
+date > finished
+wait

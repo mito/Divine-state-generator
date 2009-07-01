@@ -1,0 +1,19 @@
+@INCLUDE_PATH = /home/xbarnat/divine/support/etc/doxygen/ 
+@INCLUDE = doxyfile.local
+
+@INCLUDE_PATH = /home/xbarnat/divine/doc/tutorials/
+@INCLUDE = doxyfile.local
+
+INPUT+= .
+
+PDF_HYPERLINKS         = YES
+
+#TAGFILES          = ../../refs/library/library_reference.tag=../../../refs/library/html
+
+#This could be also set in future:
+#IMAGE_PATH+= ./img
+#HTML_HEADER=
+#COMPACT_LATEX=NO
+#LATEX_HEADER=
+#DOTFILE_DIRS=
+

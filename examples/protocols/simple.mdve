@@ -1,0 +1,35 @@
+
+// wrong versions
+// parameter V chooses version 1 = only one ack, 2 = multiple ack
+
+include(`share.mdve')
+
+// the value which is sent through L do not matter (I just need to send something)
+
+process Sender {
+byte value;
+state ready, sending, wait_ack;
+init ready;
+trans
+ ready -> sending { sync send?value; },
+ sending -> wait_ack { sync K!value;},
+ wait_ack -> sending {},
+ wait_ack -> ready { sync L?value;};
+}
+
+
+process Receiver {
+byte value;
+state wait_msg, got_msg, send_ack;
+init wait_msg;
+trans
+ wait_msg -> got_msg {sync K?value;},
+ ifelse(V, `1', `got_msg -> send_ack {sync receive!value;},
+ send_ack -> wait_msg {sync L!0;};',
+ `wait_msg -> wait_msg {sync L!0; },
+ got_msg -> wait_msg {sync receive!value;};')
+ 
+}
+
+
+system async;

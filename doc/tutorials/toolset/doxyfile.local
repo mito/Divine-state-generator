@@ -1,0 +1,19 @@
+#node: ToolSet - Decription of tools contained in DiVinE and their command line options
+
+@INCLUDE_PATH = /home/xbarnat/divine/support/etc/doxygen/
+@INCLUDE = doxyfile.local
+
+@INCLUDE_PATH = /home/xbarnat/divine/doc/tutorials
+@INCLUDE = doxyfile.local
+
+INPUT+= .
+
+
+# HTML_FOOTER=footer.html
+# HTML_STYLESHEET=styles.css
+# DOTFILE_DIRS=./dot
+# IMAGE_PATH += ./img
+# GENERATE_TAGFILE = library_reference.tag
+
+# For other options see divine/support/doxygen
+

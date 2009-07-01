@@ -1,0 +1,37 @@
+Atomic propositions (for the 4x4 version):
+------------------------------------------
+#define first5intact ((a[0]==1)&&(a[1]==2)&&(a[2]==3)&&(a[3]==4)&&(a[4]==5))
+#define intact38 ((a[2]==3)&&(a[7]==8))
+#define intact378 ((a[2]==3)&&(a[6]==7)&&(a[7]==8))
+
+Configurations used in LTL formulas:
+
+#define conf00 ((a[0]==1)&&(a[1]==2)&&(a[2]==3)&&(a[3]==4))
+#define conf01 ((a[4]==5)&&(a[5]==0)&&(a[6]==8)&&(a[7]==15))
+#define conf02 ((a[8]==10)&&(a[9]==11)&&(a[10]==14)&&(a[11]==13))
+#define conf03 ((a[12]==9)&&(a[13]==6)&&(a[14]==12)&&(a[15]==7))
+
+#define conf10 ((a[0]==2)&&(a[1]==12)&&(a[2]==3)&&(a[3]==7))
+#define conf11 ((a[4]==13)&&(a[5]==9)&&(a[6]==10)&&(a[7]==8))
+#define conf12 ((a[8]==1)&&(a[9]==11)&&(a[10]==14)&&(a[11]==4))
+#define conf13 ((a[12]==15)&&(a[13]==5)&&(a[14]==6)&&(a[15]==0))
+
+#define conf20 ((a[0]==2)&&(a[1]==12)&&(a[2]==3)&&(a[3]==10))
+#define conf21 ((a[4]==13)&&(a[5]==9)&&(a[6]==7)&&(a[7]==8))
+#define conf22 ((a[8]==1)&&(a[9]==11)&&(a[10]==14)&&(a[11]==4))
+#define conf23 ((a[12]==15)&&(a[13]==6)&&(a[14]==5)&&(a[15]==0))
+
+LTL formulas:
+------------- 
+(1) Configuration 0 (conf0[0-3]) is not reachable in a way that keeps first 5 pieces intact.
+    (which is false)
+#property !(first5intact U (conf00 && conf01 && conf02 && conf03))
+(2) If we want to reach configuration 1 (conf1[0-3]), we must move piece 3 or piece 8
+    (which is true)
+#property (F(conf10 && conf11 && conf12 && conf13) -> F(!(intact38)))
+(3) If we want to reach configuration 2 (conf2[0-3]), we must move piece 3, piece 7 or piece 8
+    (which is true)
+#property (F(conf20 && conf21 && conf22 && conf23) -> F(!(intact378)))
+
+
+

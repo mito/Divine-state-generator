@@ -1,0 +1,4 @@
+{
+{ F a }
+a := slave_1.error_state;
+}

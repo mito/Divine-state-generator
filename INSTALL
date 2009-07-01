@@ -1,0 +1,26 @@
+################### Installation is very straightforward: ######################
+
+(1) ./configure
+(2) make
+(3) make install
+
+################################################################################
+
+
+
+##################### Software requirements: ###################################
+
+Unix/Linux or similar environment
+GCC compatible compiler (tested with 3.2.3, 3.3 and 3.4)
+MPI implementation properly installed (tested with MPICH and LAM/MPI)
+
+################################################################################
+
+
+
+##################### Installation options: ####################################
+
+For full list of installation options see ./configure --help
+The most important is probably --prefix ... setting location where to install
+
+################################################################################

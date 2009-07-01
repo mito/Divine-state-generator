@@ -1,0 +1,65 @@
+// coffe-tea machine with 1 user
+// prices: 0=coffe - COFFE Kc, 1=tea - TEA Kc
+// user have INIT_CASH Kc
+// and in when works, earns SALARY Kc
+// user and automat both can have at most MAX Kc
+
+default(INIT_CASH, 5)
+default(SALARY, 6)
+default(MAX, 10)
+default(COFFE, 6)
+default(TEA, 5)
+
+//user vars
+byte cash = INIT_CASH, want, Uwhat; 
+
+//machine vars
+byte Mwhat;
+
+//control vars
+byte value, sum;
+
+channel req, in, make, take;
+
+process user {
+state working, give_money, wait, got, happy, sad; 
+init working;
+trans 
+ working -> give_money {},
+ give_money -> give_money {guard cash>=1; sync in!1; effect cash = cash-1;},
+ give_money -> give_money {guard cash>=2; sync in!2; effect cash = cash-2;},
+ give_money -> wait {sync req!0; effect want =0;},
+ give_money -> wait {sync req!1; effect want =1;},
+ wait -> got {sync take?Uwhat;},
+ got -> happy {guard Uwhat == want; },
+ got -> sad {guard Uwhat !=want;},
+ happy -> working { guard cash + SALARY <= MAX; effect cash = cash + SALARY; },
+ happy -> working { guard cash + SALARY > MAX; effect cash = MAX; };
+}
+
+process control {
+state ready, add, request;
+init ready;
+trans 
+ ready -> add {sync in?value;},
+ add -> ready {guard sum + value < MAX; effect sum = sum+value;},
+ add -> ready {guard sum + value >= MAX; effect sum = MAX;},
+ ready -> request {sync req?value; },
+ request -> ready {guard value==0 && sum>= COFFE; sync make!0; effect sum=sum-COFFE;},
+ request -> ready {guard value==1 && sum>= TEA; sync make!1; effect sum=sum-TEA;},
+ request -> ready {guard value==0 && sum< COFFE;},
+ request -> ready {guard value==1 && sum< TEA;};
+}
+
+process machine {
+byte x;
+state ready, produce, error_st;
+init ready;
+trans
+ ready -> produce {sync make?x;},
+ produce -> error_st {sync make?x;},
+ error_st -> error_st {sync make?x;},
+ produce ->ready {sync take!x;};
+}
+
+system async;

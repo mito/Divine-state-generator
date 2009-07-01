@@ -1,0 +1,5 @@
+#branch: Reference guides - brief (but often long) documentation with many technical details
+
+#Here is the setting of Doxygen for all reference guides:
+HTML_FOOTER=@TOP_PATH@/doc/refs/footer.html
+

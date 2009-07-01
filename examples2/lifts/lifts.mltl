@@ -1,0 +1,11 @@
+default(N,3)
+
+#define moveup Wheels.moving_up
+forloop(x,0,decr(N), `#define pressedup_`'x Environment.pressed_up_`'x
+')
+
+
+#property (GF pressedup_0) -> (GF moveup)
+#property G (pressedup_0 -> F moveup)
+#property  ((! moveup) U pressedup_0) || G (! moveup)
+#property  ((! moveup) U (myloop(x,0,decr(N),`pressedup_`'x',` || '))) || G (! moveup)

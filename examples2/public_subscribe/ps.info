@@ -1,0 +1,36 @@
+Publish / Subscribe Notification protocol
+-----------------------------------------
+
+Modeled by Vladimir Lapacek according to an article "Model Checking
+Publish/Subscribe Notification for thinkteam". Note that the differencies
+between ProMeLa and DiVinE native modeling language didn't allow to model
+the protocol faithfully.
+
+@InProceedings{
+  author =	{Maurice H. ter Beek and M. Massink and D. Latella and S. Gnesi and A. Forghieri and M. Sebastianis},
+  title =	{{M}odel {C}hecking {P}ublish/{S}ubscribe {N}otification for thinkteam},
+  series =	{ENTCS},
+}
+
+Parameters
+----------
+numUsers	-- number of users (default = 2)
+
+Properties
+----------
+see ps.mltl
+
+Comments
+--------
+There appeared to be a problem with the verification of a safety property
+(4), stating that a process cannot be (falsely) notified without
+registering to a file. The original model in ProMeLa suffered by the same
+problem. After some experiments with the original model and the property
+described in the article, I concluded, that the problem occurs when comes
+a notification - process reaches state doneNotify and stays there until
+doneUnregister is reached. So the subformula doneNotify -> !(!(doneGet ||
+doneRegister) U ) is satisfied in one step. The same problem applies to
+the property (5).
+
+Properties (6) and (7) are suggested as replacement for (4) and (5)
+

@@ -1,0 +1,6 @@
+#branch: Tutorials - documentation explaining principles and giving examples
+
+#Here is the setting of Doxygen for all reference guides:
+HTML_STYLESHEET=/home/xbarnat/divine/doc/tutorials/styles.css
+HTML_FOOTER=/home/xbarnat/divine/doc/tutorials/footer.html
+

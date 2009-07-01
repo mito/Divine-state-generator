@@ -1,0 +1,26 @@
+
+RETHER protocol (real-time Ethernet)
+
+according to "Local model checking and protocol analysis" (STTT (1999) 2: 219-241)
+
+parameters:
+N - number of nodes
+Slots - number of slots (bandwidth)
+RT_slots - maximal number of slots for RT (should be < Slots)
+ERROR - 0/1 the error is caused by ommision of one synchronization which leads to tricky error
+
+properties:
+- reachability of Bandwidth error_state and Node error_state
+   (reachable by very nontrivial path for ERROR=1 version)
+- ltl:
+  - granted => RT action in next cycle 	OK
+  - want => RT action in next cycle 	NO  (unless RT_Slots <=N or RT_Slots==Slots)
+  - granted => RT action in this cycle	NO
+  - always some more NRT action (of node1)	OK (only in correct version and if RT_Slots<Slots)
+  - always some more RT action (of node0)	NO
+
+size depends mainly on N:
+N = 4 ... approx 15.000
+N = 5 ... approx 50.000
+N = 6 ... approx 150.000
+

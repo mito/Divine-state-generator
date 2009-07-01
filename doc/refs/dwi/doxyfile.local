@@ -1,0 +1,35 @@
+#node: GUI - reference guide synthesized from its Java source codes (not very detailed)
+
+@INCLUDE_PATH = /home/xbarnat/divine/support/etc/doxygen/ 
+@INCLUDE = doxyfile.local
+
+@INCLUDE_PATH = /home/xbarnat/divine/doc/refs/
+@INCLUDE = doxyfile.local
+
+INPUT+= . \
+        /home/xbarnat/divine/dwi/src/divine/client \
+	/home/xbarnat/divine/dwi/src/divine/client/others \
+	/home/xbarnat/divine/dwi/src/divine/common \
+	/home/xbarnat/divine/dwi/src/divine/server
+# HTML_FOOTER=footer.html
+# DOTFILE_DIRS=./dot
+# IMAGE_PATH += /home/xbarnat/divine/support/etc/doxygen
+
+PDF_HYPERLINKS         = YES
+# GENERATE_TAGFILE       = library_reference.tag
+
+
+#This could be also set in future:
+#HTML_HEADER=
+#COMPACT_LATEX=NO
+#LATEX_HEADER=
+
+####################  Java specific options:  #####################
+#                                                                 #
+  OPTIMIZE_OUTPUT_JAVA   = YES
+  JAVADOC_AUTOBRIEF      = YES
+  FILE_PATTERNS          = *.doc *.java
+#                                                                 #
+###################################################################
+
+

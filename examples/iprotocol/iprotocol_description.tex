@@ -1,0 +1,280 @@
+\documentclass[11pt,a4]{report}
+%\setlength{\textwidth}{15cm}
+\usepackage{czech}
+\usepackage{graphics}
+
+%{{{ New commands
+
+\newcommand{\uvod}[1] {\medskip \noindent #1 \nopagebreak}
+
+\newcommand{\kratka}[2]{\parbox[t]{.2\textwidth}{\bf #1:}\
+
+                        \parbox[t]{.8\textwidth}{#2}\\ }
+\newcommand{\polozka}[1]{\item[]\hskip-2em{\bf #1}\\}
+
+\newcommand{\s}{{Sendseq}}
+\newcommand{\ra}{{Rack}}
+\newcommand{\rs}{{Recseq}}
+\newcommand{\la}{{Lack}}
+\newcommand{\rb}{{Recbuf}}
+\newcommand{\n}{{Nakd}}
+
+\renewcommand{\arraystretch}{2}
+
+%}}}
+
+\input xy
+\xyoption{all}
+
+
+\begin{document}
+
+\section*{Popis I-protokolu}
+
+I-protokol je protokol s~plovoucím oknem, ale s~nìkterými optimalizacemi
+popsanými ní¾e, které jsou zamìøeny na redukci øídícího provozu a
+opakovaného posílání dat. Velikost okna, mezi dal¹ími ``pevnými'' parametry, jako
+jsou velikost datového paketu, kvalita spoje, parametry o¹etøení chyb,
+hodnoty èasových limitù (timeoutù) nebo velikosti bufferù, 
+je rozhodnuta ve fázi ustavení spojení.
+
+Pùvodní I-protokol z~GNU UUCP pou¾ívá pevnou hodnotu SEQ=32 a je navr¾en
+pro~velikost okna men¹í nebo rovnu 16. Obecnì pro~hodnotu SEQ je mo¾no
+pou¾ít velikost okna do~$ \lfloor W/2\rfloor $.
+
+
+Jednou z optimalizací je zasílání potvrzení pouze jednou pro~ka¾dých $
+\lfloor W/2\rfloor $ pøijatých paketù.
+
+Pøi ztracení paketu nebo pøi jeho po¹kození se znovu posílá, narozdíl od
+nìkterých jiných protokolù s~plovoucím oknem, pouze ztracený nebo po¹kozený
+paket, a ne v¹echny pakety v~aktivním oknì, co¾ opìt optimalizuje funkci
+protokolu.
+
+Pokud dále nebude explicitnì øeèeno jinak, pøedpokládejme
+ve¹kerou aritmetiku modulo $SEQ$.
+
+%{{{ Subsection*: Sender
+
+\subsection*{Zasilatel}
+
+\uvod{Zasilatelská polovina pou¾ívá tyto promìnné:} 
+%
+\begin{itemize}
+%
+\item Promìnná
+%
+$$sendseq \in \{0, \ldots ,SEQ-1\}$$
+%
+
+udává sekvenèní èíslo pøí¹tího paketu pøijatého od
+vy¹¹í vrstvy. Tvoøí horní hranici zasilatelského okna (Paket s~èíslem
+$sendseq - 1$ je první, který le¾í v~aktuálním oknì). 
+
+\item Promìnná 
+
+$$rack \in \{0, \ldots ,SEQ-1\}$$
+
+udává poslední paket, na který bylo z~druhé strany pøijato potvrzení. Tvoøí
+dolní hranici zasilatelského okna (paket s~èíslem $rack + 1$ je poslední
+v~aktivním oknì). 
+
+\end{itemize}
+
+\noindent
+Protokol inicializuje promìnnou  $rack$  na 0 a promìnnou
+$sendseq$ na 1. 
+
+\uvod 
+{Hlavní cyklus zasilatelské èásti protokolu se skládá z~aktivního
+èekání na jednu z~ní¾e uvedených událostí a jejího patøièného o¹etøení:}
+
+\begin{itemize}
+\polozka{Pøijetí rámce z~komunikaèního média (od ni¾¹í vrstvy)}
+{
+\begin{itemize}
+\item
+Pokud rámec obsahuje potvrzení paketu, který je v~zasilatelovì
+aktivním oknì, promìnná $rack$ je aktualizována èíslem tohoto potvrzení.
+\item
+Jestli¾e pøijatý
+rámec obsahuje paket s~negativním potvrzením sekvenèního èísla
+paketu v~zasilatelovì aktivním oknì, je znovu poslán po¾adovaný datový paket.
+\end{itemize}
+}
+
+\polozka{Pøijetí zprávy z~u¾ivatelského rozhraní (od vy¹¹í vrstvy)}
+{Zasilatel nejdøíve zkontroluje, jestli má je¹tì místo ve svém aktivním
+oknì (tj. je-li velikost aktivního okna men¹í ne¾ $W$). Pokud ano, pøiøadí
+paketu jeho sekvenèní èíslo ($sendseq$), po¹le paket a zvedne horní hranici
+svého aktivního okna (zvý¹í promìnnou $sendseq$). Pokud je okno ji¾ plné,
+musí èekat, ne¾ se v~nìm uvolní místo (tj. ne¾ pøijme ACK, viz pøedchozí
+bod). V~tom pøípadì provádí aktivní èekání na pøíchod rámce komunikaèním
+médiem nebo na vypr¹ení èasového limitu (timeoutu).}
+
+\polozka{timeout} 
+{Zasilatel znovu po¹le ``nejstar¹í'' datový paket (pokud
+nìjaký takový existuje), pro který nedostal potvrzení.}
+
+\end{itemize}
+
+%}}}
+
+%{{{ Subsection*: Receiver
+
+\subsection*{Pøijímací polovina}
+
+\uvod
+{Hlavní datové struktury pøijímací poloviny jsou tyto:}
+
+\begin{itemize}
+\item
+Promìnná 
+
+$$recseq \in \{0, \ldots ,SEQ-1\}$$
+
+ urèuje èíslo paketu, do~kterého,
+vèetnì, byly v¹echny pakety z~druhé strany úspì¹nì pøijaty a doruèeny
+vy¹¹í vrstvì. 
+
+\item
+Promìnná 
+
+$$ lack \in \{0, \ldots ,SEQ-1\}$$
+
+udává sekvenèní èíslo
+paketu, pro~který bylo druhé stranì naposledy posíláno potvrzení. 
+
+\end{itemize}
+
+\noindent
+Aktivní okno pøijímací poloviny
+obsahuje pakety se sekvenèními èísly $recseq + 1$ a¾ $lack + W (mod  SEQ)$
+
+\begin{itemize}
+\item Buffer 
+
+ $$recbuf,  |recbuf|=SEQ $$ 
+
+uchovává pakety, které byly pøijaty mimo
+poøadí a èekají na doruèení vy¹¹í vrstvì. 
+
+\item Booleovské pole velikosti $SEQ$
+
+ $$nakd \in \{0,1\}^{SEQ} $$ 
+
+pro~ka¾dý paket v~aktivním oknì urèuje, zda byl v~poslední dobì
+(tzn. od posledního timeoutu) negativnì potvrzován.
+
+\end{itemize}
+
+\noindent
+Protokol inicializuje promìnné $lack$ a $recseq$ na 0. Buffery na zprávy
+jsou prázdné. V¹echny polo¾ky pole $nakd$ jsou inicializovány na $false$.
+
+\uvod 
+{Hlavní cyklus pøijímací èásti protokolu se skládá z~aktivního èekání
+na jednu z~ní¾e uvedených událostí a jejího patøièného o¹etøení:}
+
+\begin{itemize}
+\polozka{Pøijetí rámce z~komunikaèního média (od ni¾¹í vrstvy)}
+{
+Jestli¾e pøijatý rámec obsahuje datový paket, nejdøíve je ovìøen kontrolní
+souèet dat. Pokud je sekvenèní èíslo pøijatého paketu v~aktivním pøijímacím
+oknì, uva¾ujeme tyto mo¾nosti:
+\begin{itemize}
+\item
+Jsou-li data po¹kozena a jestli¾e nebyla negativnì 
+potvrzováno od posledního timeoutu, potom
+je vygenerován NAK pro~sekvenèní èíslo tohoto paketu.
+\item
+Pokud jsou naopak data platná a paket je první v~pøijímacím oknì (má sekvenèní
+èíslo $recseq + 1$), potom jsou tato data doruèena vy¹¹í vrstvì. Stejnì tak
+jsou doruèeny v¹echny pakety, které byly ulo¾eny v~bufferu $recbuf$ a jejich¾
+v¹ichni ``pøedchùdci'' ji¾ byly doruèeni, a to v~odpovídajícím poøadí.
+Promìnná $recseq$ je pøíslu¹nì pozmìnìna. 
+\item
+Pokud bylo pøijato
+$ \lfloor W/2\rfloor $ nebo více paketù od okam¾iku, kdy bylo posláno
+potvrzení (implicitní nebo explicitní), potom je vygenerován explicitní
+ACK pro~hodnotu $recseq$ a je na tuto hodnotu je nastavena promìnná $lack$.
+\item
+Dále pokud paket nemá sekvenèní èíslo $recseq + 1$, tedy pokud byl pøijat
+mimo poøadí, je ulo¾en do~bufferu $recbuf$ (pokud ji¾ nebyl pøijat døíve),
+a je vygenerován NAK pro~v¹echna sekvenèní èísla pøedcházejících chybìjících
+paketù, pro~která nebyl posílán NAK od posledního timeoutu.
+\end{itemize}
+}
+
+\polozka{timeout}
+{Nejprve je ``vyèi¹tìno'' pole $nakd$ k~indikaci, ¾e je mo¾no poslat
+nová negativní potvrzení, pokud to bude nutné. 
+Pokud ¾ádný rámec neèeká na pøijetí, je vygenerován
+NAK pro~``první'' chybìjící paket v~aktivním oknì
+( s~èíslem $recseq + 1$).}
+
+\end{itemize}
+
+%}}}
+
+\section*{Livelock v~I-protokolu}
+
+Livelock je nekoneèná sekvence
+vnitøních akcí. Nìkdy je tato situace zahrnována pod tzv. deadlock
+neboli uváznutí. V~pùvodním významu deadlock znamená, ¾e proces
+ji¾ neprovede ¾ádnou akci. V~roz¹íøeném významu pøedpokládáme, ¾e
+nebude provedena ¾ádná viditelná akce, tj. libovolná akce kromì
+vnitøní akce ($\tau$). 
+
+Obrázek~\ref{livelock} ilustruje výskyt chyby pro~velikost okna 1 a velikost
+bufferu média 1:
+
+Nejprve zasilatel po¹le paket DATA1, ten je v~poøádku doruèen a
+pøíjemce odpoví zasláním ACK1. Potvrzení se v¹ak pøi pøenosu ztratí.
+Potom je zasilatel ¾ádán o~zaslání dal¹ího paketu, ale nemá ji¾
+místo ve svém aktivním oknì, pøejde tedy do~stavu èekání, ne¾ se
+místo uvolní.
+
+Potom nastane timeout, kdy zasilatel po¹le DATA1,
+ta jsou v¹ak pøíjemcem ignorována,
+proto¾e nejsou v~jeho aktivním oknì. Stejnì tak pøi timeoutu pøíjemce
+po¹le negativní potvrzení na oèekávaný datový paket NAK2, který je
+zasilatelem ignorován, proto¾e není v~jeho aktivním oknì.
+Tato smyèka se potom opakuje neustále.
+
+Livelock se vyskytl, proto¾e zasilatel nemá informace od pøíjemce
+o~tom, kolik paketù ji¾ pøijal. Jednoduchá zmìna zajistí, ¾e mo¾nost
+tohoto livelocku bude odstranìna. Staèí, kdy¾ pøi timeoutu zasilatel
+po¹le vedle negativního potvrzení prvního chybìjícího paketu i
+pozitivní potvrzení posledního pøijatého paketu. 
+
+\begin{figure}[bhtp]
+
+\xymatrix{
+         & *{SENDER}&*{MEDIUM}&*{RECEIVER}&\\
+         \ar@{--}[rrrr]&&&&\\
+         &\ar[rr]^{data1}&&&\\
+         &&*{\bullet}&\ar[l]_{ack1}&\\
+         \ar@{--}[rrrr]_{timeout}&&&&\\
+         &\ar[rr]^{data1}&&&*{\txt{ignorován}}\\
+         *{\txt{ignorován}}&&&\ar[ll]_{nak2}&\\
+         \ar@{--}[rrrr]&&&&
+         }
+
+\caption{Scénáø ilustrující chybu v~protokolu}
+\label{livelock}
+\end{figure}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

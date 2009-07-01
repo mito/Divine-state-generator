@@ -1,0 +1,17 @@
+Atomic propositions
+-------------------
+#define eat0	(phil_0.eat)
+#define one0	(phil_0.one)
+#define someoneeats	(eating>0)
+
+Properties
+----------
+(1) philosopher 0 eats infinitely many times
+#property GFeat0
+
+(2) if philosopher 0 takes first fork he will eats eventually
+#property G(one0->Feat0)
+
+(3) infinitely many times someone eats 
+#property GFsomeoneeats
+

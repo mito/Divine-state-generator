@@ -1,0 +1,30 @@
+#node: Library - reference guide (generated from source codes of the library)
+
+@INCLUDE_PATH = @TOP_PATH@/support/etc/doxygen/ 
+@INCLUDE = doxyfile.local
+
+@INCLUDE_PATH = @TOP_PATH@/doc/refs/
+@INCLUDE = doxyfile.local
+
+INPUT+= . \
+	@TOP_PATH@/src/common \
+	@TOP_PATH@/src/distributed \
+	@TOP_PATH@/src/por \
+	@TOP_PATH@/src/storage \
+	@TOP_PATH@/src/system \
+	@TOP_PATH@/src/system/bymoc \
+	@TOP_PATH@/src/system/dve \
+	@TOP_PATH@/src/system/dve/syntax_analysis
+HTML_FOOTER=footer.html
+DOTFILE_DIRS=./dot
+IMAGE_PATH += @TOP_PATH@/support/etc/doxygen
+
+PDF_HYPERLINKS         = YES
+GENERATE_TAGFILE       = library_reference.tag
+
+
+#This could be also set in future:
+#HTML_HEADER=
+#COMPACT_LATEX=NO
+#LATEX_HEADER=
+

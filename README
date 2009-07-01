@@ -1,0 +1,18 @@
+This is the package containing DiVinE package including DiVinE/Library and
+DiVinE/ToolSet.
+
+For more informations see http://anna.fi.muni.cz/divine/
+
+For compilation of this package follow the instructions:
+(0) If you have this package from DiVinE web site, skip, this step and go to (1)
+    If you have these sources from CVS, run ./autogen to create
+    ./configure and other neccessary files for successful configuration of the
+    package.
+    For success in this step, you need Autoconf 2.59 and Automake 1.8
+(1) Run ./configure
+    If you noticed some problems during configuration, contact us
+    (paradise@fi.muni.cz) or directly contact creator of this configuration
+    (xsimece1@fi.muni.cz)
+(2) In case of successful configuration run make.
+    In case of any problems, again, contact us.
+    

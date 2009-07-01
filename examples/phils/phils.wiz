@@ -1,0 +1,18 @@
+#FILE
+phils.mdve
+#PARAMETERS
+N in 2,3,4
+//N =4; ROOM in 0,3,4
+//N =5; LEFT in 0,1
+#PROPOSITIONS
+//eat	state	phil_0.eat
+//one	state	phil_0.one
+#OPTIONS
+//ltl on-the-fly
+#COMMANDS
+//reachability size deadlock
+//LTL GF eat
+//LTL G (one -> F eat)
+generate -s
+reachability size
+

@@ -1,0 +1,35 @@
+Elevator 2
+----------
+Designed by Jiri Barnat. Motivated by elevator promela model from the SPIN
+distribution, but actually implements LEGO elevator model built in the
+Parallel and Distributed Systems Laboratory at Faculty of Informatics,
+Masaryk University Brno.
+
+
+Parameters
+----------
+N=x -- the number of served floors (default N=2)
+
+CONTROL=naive,clever -- naive controller chooses the next floor to be served
+randomly, clever controller chooses the next floor to be served to be the
+next requested one in the direction of the last cab movement, if there is no
+such floor then in direction oposite to the direction of the last cab
+movement (default CONTROL=clever)
+
+
+Verified properties
+-------------------
+See file elevator2.ltl.
+
+
+State space size (without properties)
+-------------------------------------
+CONTROL=clever:
+ N=2	136
+ N=5	5120
+ N=10	583680
+
+CONTROL=naive:
+ N=2	44
+ N=5	1600
+ N=10	179200

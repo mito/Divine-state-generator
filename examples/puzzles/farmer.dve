@@ -1,0 +1,53 @@
+
+channel to_boat, from_boat;
+
+process man {
+state left, right;
+init left;
+trans
+ left -> right {},
+ right -> left {};
+}
+
+process wolf {
+state left, boat, right;
+init left;
+trans
+ left -> boat { guard man.left ; sync to_boat?; },
+ boat -> left { guard man.left ; sync from_boat?; },
+ boat -> right { guard man.right ; sync from_boat?; },
+ right -> boat { guard man.right ; sync to_boat?; };
+}
+
+process goat {
+state left, boat, right;
+init left;
+trans
+ left -> boat { guard man.left ;sync to_boat?; },
+ boat -> left { guard man.left ; sync from_boat?; },
+ boat -> right { guard man.right ; sync from_boat?; },
+ right -> boat { guard man.right ;sync to_boat?; };
+}
+
+process cabbage {
+state left, boat, right;
+init left;
+trans
+ left -> boat { guard man.left ;sync to_boat?; },
+ boat -> left { guard man.left ; sync from_boat?; },
+ boat -> right { guard man.right ; sync from_boat?; },
+ right -> boat { guard man.right ;sync to_boat?; };
+}
+
+
+process boat {
+state empty, one, two;
+init empty;
+trans
+ empty -> one {sync to_boat!; },
+ one -> two {sync to_boat!; },
+ two -> one {sync from_boat!; },
+ one -> empty {sync from_boat!;} ;
+}
+
+system async;

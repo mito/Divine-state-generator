@@ -1,0 +1,93 @@
+default(numUsers, 2)
+
+Atomic propositions
+-------------------
+#define cc_co (CC.doneCheckOut)
+#define cc_cdo (CC.doneCheckedOut)
+#define cc_na (CC.doneNotAvailable)
+#define cc_ci (CC.doneCheckIn)
+#define cc_unco (CC.doneUnCheckOut)
+#define u_get (User_0.doneGet)
+#define u_reg (User_0.doneRegister)
+#define u_unreg (User_0.doneUnRegister)
+#define ua_not (UserAdmin_0.doneNotify)
+#define ua_upd (UserAdmin_0.doneUpdate)
+#define cc_get0 (CC.doneGet0)
+#define cc_reg0 (CC.doneRegister0)
+#define cc_cdox (CC.doneCheckedOut1`'forloop(x, 2, decr(numUsers), ` || CC.doneCheckedOut`'x'))
+#define cc_unreg0 (CC.doneUnRegister0)
+#define cc_not0 (CC.doneNotify0)
+#define cc_upd0 (CC.doneUpdate0)
+#define cc_or (CC.doneUnCheckOut1 || CC.doneCheckIn1 || CC.doneCheckInOut1`'forloop(x, 2, decr(numUsers), ` || CC.doneUnCheckOut`'x || CC.doneCheckIn`'x || CC.doneCheckInOut`'x'))
+#define cc_wlf (CC.checkWriteLockFalse)
+
+
+Properties
+----------
+
+(1) Whenever the CC has received a lock request on file by a user through
+a checkOut, then it eventually responds to this user by either sendig the
+user a checkedOut or a notAvailable.
+
+#property G(cc_co -> F(cc_cdo || cc_na))
+
+
+(2) There exists a run in which the left-hand side of the previous
+implication eventually becomes satisfied
+
+#property !(F cc_co)
+
+
+(3) Whenever the CC has granted a lock on file 0 to a user through a
+checkedOut, then this user eventually releases this lock by sending the CC
+a checkIn or an unCheckOut.
+
+#property G(cc_cdo -> F(cc_ci || cc_unco))
+
+
+(4) Can it happen, that a user receives a notify without currently being
+registered for the file this notify refers to?
+
+#property !(!(u_get || u_reg) U ua_not) && G(u_unreg -> !(!(u_get || u_reg) U ua_not))
+
+
+(5) Can it happen, that a user receives a update without currently being
+registered for the file this update refers to?
+
+#property !(!(u_get || u_reg) U ua_upd) && G(u_unreg -> !(!(u_get || u_reg) U ua_upd))
+
+
+(6) Rewrite of (4)
+
+#property !(!(u_get || u_reg) U ua_not) && G(!(u_unreg && ua_not) -> (u_unreg -> !(!(u_get || u_reg) U ua_not))) && G !((!ua_not && u_unreg) && ((!ua_not && u_unreg) U (ua_not && u_unreg)))
+
+
+(7) Rewrite of (5)
+
+#property !(!(u_get || u_reg) U ua_upd) && G(!(u_unreg && ua_upd) -> (u_unreg -> !(!(u_get || u_reg) U ua_upd))) && G !((!ua_upd && u_unreg) && ((!ua_upd && u_unreg) U (ua_upd && u_unreg)))
+
+
+(8) It may never be the case that user 0 is (still) registered for file 0
+the moment in which another user checks out file 0, but user 0
+nevertheless is not notified.
+
+#property G !((cc_get0 || cc_reg0) && (F cc_cdox) && (!cc_unreg0 U (cc_cdox && G !cc_not0)))
+
+
+(9) It may never be the case that user other than 0 sends an unCheckOut, a
+checkIn or a checkInOut for file 0 to the CC, while user 0 is not
+currently registered for file 0, and that user 0 does eventually get
+updated for file 0, without meanwhile registering for file 0.
+
+#property G !((cc_get0 || cc_reg0) && (F cc_or) && (!cc_unreg0 U (cc_or && G !cc_upd0)))
+
+
+(10) Denial of service??
+
+#property G F u_get
+
+
+(11) This formula checks the assertion made in checkInOut routine.
+
+#property G !cc_wlf
+

@@ -1,0 +1,5 @@
+{
+{F (a && b)}
+a := Cache_0.dirty;
+b := Cache_1.dirty;
+}

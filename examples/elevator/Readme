@@ -1,0 +1,13 @@
+
+Simple model of elevator serving N floors
+
+parameters:
+N = number of floors
+K = size of buffer for environment requests
+CONTROL =
+  naive
+  fifo
+ (add more)
+
+properties:
+LTL:  if the elevator is called to the first floor, it will eventually arive there and open the door (should not be sat. by naive, by fifo OK, but needs fairness)

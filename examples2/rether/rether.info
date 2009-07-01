@@ -1,0 +1,24 @@
+RETHER protocol (real-time Ethernet)
+------------------------------------
+Modeled by Radek Pelanek according to
+"Local model checking and protocol analysis" (STTT (1999) 2: 219-241)
+
+parameters
+----------
+N=x 	  -- number of nodes (default N=4)
+Slots 	  -- number of slots (bandwidth Slots=3)
+RT_slots  -- maximal number of slots for RT (should be < Slots, default 
+             RT_slots=2)
+ERROR=0/1 -- the error is caused by ommision of one synchronization which
+	     leads to tricky error (default ERROR = 0)
+
+properties:
+-----------
+see rether.ltl
+
+State space size (without properties)
+-------------------------------------
+size depends mainly on N:
+N = 4 ... approx 15.000
+N = 5 ... approx 50.000
+N = 6 ... approx 150.000

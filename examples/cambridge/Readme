@@ -1,0 +1,11 @@
+
+ Cambridge communication protocol
+
+according to model in Spin distribution (which is according to Needham &..?)
+
+parameters:
+- K = size of buffers
+- LOSS = channels can loose messages
+
+properties:
+- reachability of error states (not reachable)

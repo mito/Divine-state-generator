@@ -1,0 +1,22 @@
+
+// simple mutual exclusion protocol on token ring of size N
+
+default(N,3)
+default(LOOPS,0)
+
+int turn = 0;
+
+define(P, `process P_$1 {
+state NCS, CS, wait;
+init NCS;
+trans
+ifelse(LOOPS, 1, `NCS -> NCS {},',`')
+NCS -> wait {},
+wait -> CS { guard turn == $1; },
+CS -> NCS { effect turn = $2; };
+}
+')
+
+forloop(i,0,decr(N), `P(i, eval((i+1)%N))')
+
+system async;

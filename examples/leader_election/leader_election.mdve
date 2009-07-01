@@ -1,0 +1,61 @@
+// maximal number of processes is 64
+default(N,3)
+
+define(K,eval(2*N))
+define(ONE,1)
+define(TWO,2)
+define(WINNER,0)
+
+define(TR,64)    
+define(pair, `($1*TR+$2)')
+define(first, $1/TR)
+define(second, $1%TR)
+
+forloop(x,0,decr(N),`buffer_channel(ch_`'x,K)')
+
+byte nr_leaders;
+byte nmbr[N];     // used to random initialization
+
+define(node, `process Node_$1 {
+byte max, number, neigh;
+bool know=false, active=true;
+state start, wait, got_msg, q1, q1a, q1n, q2, q2a, q2n, qw, qwcheck;
+init start;
+trans 
+ start -> wait { guard Init.ready; sync ch_$2!pair(ONE,nmbr[$1]); effect max=nmbr[$1];},
+
+ wait -> got_msg { sync ch_$1?number; },
+ got_msg -> q1 { guard first(number) == ONE; effect number = second(number); },
+ got_msg -> q2 { guard first(number) == TWO; effect number = second(number); },
+ got_msg -> qwcheck { guard first(number) == WINNER; effect number = second(number); },
+ 
+ q1 -> q1a { guard active; },
+ q1 -> q1n { guard active==false; },
+ q1n -> wait { sync ch_$2!pair(ONE,number); },
+ q1a -> wait { guard number != max; sync ch_$2!pair(TWO,number); effect neigh = number; },
+ q1a -> wait { guard number == max; sync ch_$2!pair(WINNER,number); effect know = true; },
+
+ q2 -> q2a { guard active; },
+ q2 -> q2n { guard active==false; },
+ q2n -> wait { sync ch_$2!pair(TWO,number); },
+ q2a -> wait { guard neigh > number && neigh > max; sync ch_$2!pair(ONE,neigh); effect max = neigh; },
+ q2a -> wait { guard not (neigh > number && neigh > max); effect active = false; },
+
+ qwcheck -> qw { guard number == nmbr[$1]; effect nr_leaders = nr_leaders+1; }, //I am the leader
+ qwcheck -> qw { guard number != nmbr[$1];}, 
+ qw -> wait { guard know; },
+ qw -> wait { guard know==false; sync ch_$2!pair(WINNER,number); };
+}
+
+')
+process Init {
+ byte i=1;
+ state start,ready;
+ init start;
+ trans 
+  forloop(x,0,decr(N),`start->start {guard nmbr[x]==0 && i<eval(N+1); effect nmbr[x]=i,i=i+1;},
+  ')start->ready {guard i==eval(N+1);};
+}
+
+forloop(x,0,decr(N),`node(x,eval((x+1)%N))')
+system async;

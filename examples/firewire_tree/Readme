@@ -1,0 +1,22 @@
+
+Firewire (IEEE 1394) -- tree identification protocol (tip)
+
+according to special number of Formal Aspects of Computing (volume 14, num 3)
+particularly article "Using SPIN to Analyse the Firewire protocol"
+
+parameters:
+-T topology
+ 1 = line with N nodes
+ 2 = fixed acyclic with 6 nodes
+ 3 = fixed cyclic with 6 nodes
+- velikost bufferu
+
+It is not completely finished... je to proste blbe, protoze nemam kanal mezi
+kazdyma dvema, takze si muzu precist zpravu jindy nez kdyz ju chcu....
+
+properties:
+...
+
+size:
+pro T=1, roste (asi docela exp. s N), pro N=3 male
+pro T=2, asi 158.000

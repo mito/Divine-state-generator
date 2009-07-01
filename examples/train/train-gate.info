@@ -1,0 +1,19 @@
+Train-Gate
+----------------------------------------------------
+An example converted from UPPAAL demo. For more information, please see:
+"Automatic Verification of Real-Time Communicating Systems by Constraint Solving",
+by Wang Yi, Paul Pettersson and Mats Daniels. In Proceedings of the 7th International
+Conference on Formal Description Techniques, pages 223-238, North-Holland. 1994.
+
+Modeled by Tomas Kratochvila.
+The clock x were modeled by new process Clock and byte x is from 0 to 25.
+
+Parameters
+----------
+N=x 	 -- the number of trains + 1 (default N=9), this means that if you
+            want 4 trains assign N to 5.
+
+Properties:
+-----------
+see train-gate.ltl
+

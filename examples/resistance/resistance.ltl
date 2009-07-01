@@ -1,0 +1,30 @@
+Atomic propositions:
+--------------------
+#define measure_is_in_progress (Measuring_0.measure_in_progress==1)
+#define cage_is_safe (cage_safe==1)
+#define very_small_resistance (Algorithm.too_small_resistance==1)
+#define very_large_resistance (Algorithm.too_large_resistance==1)
+#define min_range (range==0)
+#define max_range (range==5)
+#define is_correct_value (Algorithm.correct_value==1)
+
+LTL formulas:
+-------------
+(1) When system Measuring is in the state measure_in_progress the system is under the high voltage. There should never happen that cage is not safe (it should be opened) and the system is under high voltage at the same time. Same people can accidentally go into the cage and it is very danger (voltage value in wires should be 5000 V).
+#property G(measure_is_in_progress -> cage_is_safe)
+
+(2) The system Algorithm in too_small_resistance state only when all possible ranges are tested the range==0 is a minimum.
+#property G(very_small_resistance -> min_range)
+
+(3) The system Algorithm in too_large_resistance state only when all possible ranges are tested the range==5 is a maximum.
+#property G(very_large_resistance -> max_range)
+
+(4) The resistance is too high when no cable is connected for example.
+#property G(F(very_large_resistance))
+
+(5) The resistance is too small when same wires is incorrectly connected.
+#property G(F(very_small_resistance))
+
+(6) Algorithm finds the value of resistance correct eventually.
+#property G(F(is_correct_value))
+

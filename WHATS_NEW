@@ -1,0 +1,41 @@
+DiVinE Cluster 0.8.2
+====================
+- Workaround for SEEK troubles in new OpenMPI.
+- Fixed a few bugs in precompilation process
+- DVE models are inerpreted by default (option -p forces precompilation)
+- Sequence of states is printed as a trail if the system does not support transitions (e.g. ProMeLa)
+- BLEDGE accepts systems without property process.
+
+DiVinE Cluster 0.8.1 (internal only)
+=====================
+- Limited support for mCRL2
+- Fix compilation issues for some non GCC compilers.
+- Added compiled execution of DVE files. (divine.precompile)
+
+DiVinE Cluster 0.8.0
+=====================
+- GCC 4.3 compliant.
+- Optimized scalability for up to 256 cores.
+- Fixed bug that caused distr_reachability to crash on DVE models with error states.
+
+
+DiVinE 0.7.2
+======================
+- Support for 64-bit OS
+- Scalability improved  (Issend -> Isend)
+
+
+DiVinE 0.7.1
+======================
+- State generator performance improved (expression compaction).
+- Property decomposition for ProMeLa models.
+- Static Huffman's compression of states available on demand.
+- Works with MPICH2.
+- Introduced POR for divinw.owcty algorithm.
+- Unreachable code of propert porcess is not reported anymore.
+- Other bug fixies.
+
+	
+DiVinE 0.7.0 and older
+======================
+We are sorry, but we do not maintain changes for those releases.

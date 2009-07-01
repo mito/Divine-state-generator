@@ -1,0 +1,58 @@
+(Re)Written by Peter Rockai <me@mornfall.net>. Based on code by
+Vojtech Forejt.  License status of original code unclear. Parts
+written anew are covered by 3-clause BSD (especially including
+NameMap, Wired, Request classes and all tests).
+
+WORKS:
+- login, logout
+- model and property manipulation
+- storage of user data
+- loading of algorithm and cluster descriptions
+- making tasks as a set of tool invocations (on possibly different clusters)
+- execution of tasks
+- locking of items with results
+- collecting tool results
+- font size (killer feature)
+- task abortion
+- element paths and following automatic panel updates and tree selection
+  persistence
+- "event" list (algorithms finished and so)
+- cluster load monitor
+- serverless mode for client
+- proper context menus, context toolbars
+- remove the type comboboxes 
+  - set model type at creation time
+  - from file should create new model, 
+  - only LTL properties should have their own nodes,
+    state space and property process will only be
+    available on the task setup combobox
+- basic job, task UI
+
+SHORTTERM
+- improve the ui for tasks?
+- profiles
+- tool parameter input
+- nicer result presentation:
+  - counterexamples
+  - report viewer
+  - improve log viewer (maybe more longterm: show/hide columns, sort by column)
+- more robust job handling
+- reattaching of pbs in-progress jobs on worker restart
+- a reservation/schedule/something tab for jobs, which shows where your job is in the PBS queue?
+
+LONGTERM
+- user, cluster and tool management (admin mode)
+- timeout/keepalive?
+
+PENDING RENAMES
+dwi -> gui (?)
+
+RUNNING
+Currently, dwi server expects to find $HOME/divine/dwi/store and
+$HOME/divine/dwi/store/user directories. It currently needs write
+permission for the user directory, but store will be written in future
+as well.
+
+The store directory is expected to have 3 files in it: algorithms,
+clusters and passwd. Example files included in CVS should be
+self-explantory.

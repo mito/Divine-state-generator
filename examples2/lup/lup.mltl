@@ -1,0 +1,39 @@
+default(N,4)
+
+// Definition of atomic propositions 
+ forloop(i,0,decr(N),`#define ld`'i (lup`'i.load_data) 
+' )
+ forloop(i,0,decr(N),`#define w`'i (lup`'i.wait) 
+' )
+
+
+// Mutual exclusion of accesses to CAM:
+// Assert globally that no pair of lups
+// accesses CAM at the same time
+// Expected result: TRUE
+
+#property G !(  myloop(i,0,decr(decr(N)),`myloop(j,incr(i),decr(N),`( ld`'i && ld`'j )',`|| ')',`|| ') )
+
+
+// Fairness of using CAM (no starving, no blocking):
+// Assert globally for each lup that if the machine is in wait state then
+// it will reach load_data sometimes
+// Expected result: TRUE
+
+#property G ( myloop(i,0,decr(N),`( w`'i -> F ld`'i )',`&& ') )
+
+
+// The longest waiting example is a couterexample of this formula
+// (N-1)*N steps of waiting for the CAM access
+// Expected result: FALSE 
+
+#property G (!(myloop(i,1,eval(N*(N-1)),`w0',`&& ( X ') forloop(i,1,eval(N*(N-1)),`)') )
+
+
+// There is no longer waiting example 
+// (N-1)*N + 1 steps of waiting for the CAM access
+// Expected result: TRUE
+
+#property G (!(myloop(i,0,eval(N*(N-1)),`w0',`&& ( X ') forloop(i,0,eval(N*(N-1)),`)') )
+
+

@@ -1,0 +1,46 @@
+PLC model of experimental chemical plant
+----------------------------------------
+SPIN case study rewritten to DiVinE 
+(http://netlib.bell-labs.com/netlib/spin/ws00/18850075.pdf, or 
+http://www.informatik.uni-freiburg.de/~lafuente/models/models.html "PLC 
+Control Schedule").
+
+BibTex:
+@InProceedings{,
+  author = 	 {Ed Brinksma and Angelika Mader},
+  title = 	 {Verification and Optimization of a PLC Control 
+Schedule},
+  booktitle = 	 {International SPIN Workshop},
+  OPTyear = 	 {2000},
+}
+
+
+Big description of the model, big state size, slower computation of successors.
+
+Modeled by Pavel Moravec
+
+Parameters
+----------
+MAXTIME=x	-- maximal time of progress of the plant (default MAXTIME=500)
+
+Verification results
+--------------------
+reachability of error!=0: YES (error=1 only) -- for checking of reachability there is a file plc.is_error_reachable
+Property (1): NOT satisfied (in fair model checking it should be satisfied)
+Property (2): IS satisfied
+Property (3): NOT satisfied (in fair model checking it should be satisfied)
+
+
+
+The size of the state space (without property)
+----------------------------------------------
+MAXTIME		States		Transitions
+-------------------------------------------
+500		1268968		2058701
+550		1480805		2401997
+600		3763999		6100165
+650		12127486	19640836
+700		26019334	42140751
+750		35875209	58132963
+800		39604855	64193898
+850		41419852	67137956

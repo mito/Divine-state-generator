@@ -1,0 +1,6 @@
+This directory contains scripts used purely in the ParaDiSe laboratory and
+they are strongly dependant on our laboratory setup.
+
+These scripts are not useful for users of DiVinE, neither for external
+developers of DiVinE.
+

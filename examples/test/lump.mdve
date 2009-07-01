@@ -1,0 +1,13 @@
+
+default(N, 10000)
+
+int x=0;
+
+process A {
+state q;
+init q;
+trans q -> q { guard x<N; effect x = x+1;},
+q -> q {effect x =0;};
+}
+
+system async;

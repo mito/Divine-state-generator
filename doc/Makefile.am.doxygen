@@ -1,0 +1,57 @@
+include $(top_srcdir)/Makefile.am.global
+
+dist_noinst_SCRIPTS=doxyfile.local
+CLEANFILES=doxyfile.local
+dist_noinst_DATA=doxyfile.in
+
+do_subst=sed -e 's,[@]TOP_PATH[@],$(TOP_PATH),g'
+
+.PHONY: all
+all: html latex
+
+.PHONY: html
+html: doxyfile.local $(top_srcdir)/support/etc/doxygen/doxyfile.local \
+     $(DOXYGEN_MORE_CONFIG_FILES) always_compile 
+	$(DOXYGEN) doxyfile.local
+	cp $(TOP_PATH)/support/etc/doxygen/divine_mini.gif ./html
+	cp $(TOP_PATH)/support/etc/doxygen/main.css ./html
+
+# latex should be called only after target html
+# it goes to the latex directory to create PDF file and rename according to
+# the name of directory
+.PHONY: latex
+latex: always_compile
+	PDFNAME="`basename $(subdir)`.pdf" && \
+	cd latex && $(MAKE) && \
+	mv refman.pdf ../"$$PDFNAME"
+	
+
+doxyfile.local: doxyfile.in
+	$(do_subst) < doxyfile.in > doxyfile.local
+
+$(top_srcdir)/support/etc/doxygen/doxyfile.local:
+	cd $(top_srcdir)/support/etc/doxygen && $(MAKE) doxyfile.local
+
+.PHONY:	always_compile
+always_compile:
+
+#Called by clean. Used for cleaning of directories html and latex
+#It also cleans the files with warnings produced by doxygen
+clean-local:
+	test ! -e html || rm -rf html
+	test ! -e latex || rm -rf latex;
+	test ! -e warnings.doxygen || rm -f warnings.doxygen;
+	PDFNAME="`basename $(subdir)`.pdf" && \
+	test ! -e "$$PDFNAME" || rm -f "$$PDFNAME"
+
+install-data-hook:
+	NEWSUBDIR=`echo "$(subdir)" | sed -e 's,^doc,,'` && \
+	NEWDIR="$(pkgdocdir)$$NEWSUBDIR" && \
+	echo "Installing directory $$NEWDIR" && \
+	$(INSTALL) -d "$$NEWDIR" && \
+	PDFNAME="`basename $(subdir)`.pdf" && \
+	test -e "$$PDFNAME" && cp "$$PDFNAME" "$$NEWDIR" && \
+	test -e html && cp -r html "$$NEWDIR" && \
+	echo "Documentation from $(subdir) installed"
+
+

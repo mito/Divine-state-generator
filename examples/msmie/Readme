@@ -1,0 +1,13 @@
+
+ MSMIE protocol (slave-master)
+ according to "Gaining Assurence with Formal Methods" Bruns, Anderson (in Applications of Fromal Methods)
+
+Picture: msmie.jpg
+
+three parameters:
+S = number of slaves
+M = number of masters
+N = size of buffer
+
+Properties:
+reachability of slave's error state -- reachable for buffer size < 3; otherwise unreachable

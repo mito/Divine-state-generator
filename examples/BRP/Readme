@@ -1,0 +1,23 @@
+
+ according to paper "The Bounded Retransmition Protocol must be on time!"
+ basic structure:
+ 
+	Producer				Consumer
+	 |   ^					   ^
+     Sin |   | Sout				   | Rout
+	 v   |			     		   |
+	Sender -----toK--------> K ---fromK----> Receiver
+		<---timeout-----
+		<-----fromL-------L <-----toL----
+
+
+see. brp1.jpg, brp2.jpg
+
+
+parameters:
+REPEAT = maximal number of retransmitions
+MAX_FRAMES = maximal number of frames
+ERROR (0/1) = for 1 there with error (which I have done in modelling)
+
+properties:
+reachability of Consumer.st_error (unreachable should be, reachable with error)

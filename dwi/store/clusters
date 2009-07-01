@@ -1,0 +1,49 @@
+DiVinE: host: anna.fi.muni.cz
+DiVinE: type: pbs
+DiVinE: login: divineuser
+DiVinE: work-directory: /home/divineuser/divine-cvs/dwi/store/work
+DiVinE: work-path: /home/divineuser/divine-cvs/bin:$PATH
+DiVinE: computers: psyche01: load: 0.5
+DiVinE: computers: psyche01: cpu-count: 2
+DiVinE: computers: psyche02: load: 0.5
+DiVinE: computers: psyche02: cpu-count: 2
+DiVinE: computers: psyche03: load: 0.5
+DiVinE: computers: psyche03: cpu-count: 2
+DiVinE: computers: psyche04: load: 0.5
+DiVinE: computers: psyche04: cpu-count: 2
+DiVinE: computers: psyche05: load: 0.5
+DiVinE: computers: psyche05: cpu-count: 2
+DiVinE: computers: psyche06: load: 0.5
+DiVinE: computers: psyche06: cpu-count: 2
+DiVinE: computers: psyche07: load: 0.5
+DiVinE: computers: psyche07: cpu-count: 2
+DiVinE: computers: psyche08: load: 0.5
+DiVinE: computers: psyche08: cpu-count: 2
+DiVinE: computers: psyche09: load: 0.5
+DiVinE: computers: psyche09: cpu-count: 2
+DiVinE: computers: psyche10: load: 0.5
+DiVinE: computers: psyche10: cpu-count: 2
+DiVinE: computers: psyche11: load: 0.5
+DiVinE: computers: psyche11: cpu-count: 2
+DiVinE: computers: psyche12: load: 0.5
+DiVinE: computers: psyche12: cpu-count: 2
+DiVinE: computers: psyche13: load: 0.5
+DiVinE: computers: psyche13: cpu-count: 2
+DiVinE: computers: psyche14: load: 0.5
+DiVinE: computers: psyche14: cpu-count: 2
+DiVinE: computers: psyche15: load: 0.5
+DiVinE: computers: psyche15: cpu-count: 2
+DiVinE: computers: psyche16: load: 0.5
+DiVinE: computers: psyche16: cpu-count: 2
+DiVinE: computers: psyche17: load: 0.5
+DiVinE: computers: psyche17: cpu-count: 2
+DiVinE: computers: psyche18: load: 0.5
+DiVinE: computers: psyche18: cpu-count: 2
+DiVinE: computers: psyche19: load: 0.5
+DiVinE: computers: psyche19: cpu-count: 2
+DiVinE: computers: psyche20: load: 0.5
+DiVinE: computers: psyche20: cpu-count: 2
+DiVinE: computers: psyche21: load: 0.5
+DiVinE: computers: psyche21: cpu-count: 2
+DiVinE: computers: psyche22: load: 0.5
+DiVinE: computers: psyche22: cpu-count: 2

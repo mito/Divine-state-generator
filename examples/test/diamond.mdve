@@ -1,0 +1,20 @@
+
+default(N,9)
+
+process A {
+byte x=0;
+state q;
+init q;
+trans
+ q -> q {guard x<N; effect x = x+1;};
+}
+
+process B {
+byte x=0;
+state q;
+init q;
+trans
+ q -> q {guard x<N; effect x = x+1;};
+}
+
+system async;

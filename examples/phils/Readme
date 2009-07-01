@@ -1,0 +1,11 @@
+
+Classical dining philosophers
+
+parameters:
+N = number of phils
+LEFT (0/1) = one left handed
+ROOM = solution with room, parameter gives capacity of room
+
+properties:
+deadlock -- in simple solution
+LTL: some simple minded about phil0 eating inf. often (counterexamples are unfair)

@@ -1,0 +1,53 @@
+
+
+default(N,3) dnl number of floors
+default(K,2) dnl size of channel for calls
+
+buffer_channel(call,K)
+
+byte current, go_to;
+
+process doors {
+state close, open;
+init open;
+trans
+ open -> close { },
+ close -> open { guard go_to == current;};
+}
+
+process motor {
+state q;
+init q;
+trans
+ q -> q { guard go_to < current && doors.close; effect current = current - 1;},
+ q -> q { guard go_to > current && doors.close; effect current = current + 1;};
+}
+
+process environment {
+state forloop(i, 0, decr(N), ``called_'i,') q;
+init q;
+trans
+myloop(i,0, decr(N), ` q -> `called_'i { sync call!i; }, `called_'i -> q {}',`,
+');
+}
+
+
+define(naive, `process control {
+state ready;
+init ready;
+trans
+ ready -> ready { sync call?go_to; };
+}
+')
+
+define(fifo, `process control {
+state ready;
+init ready;
+trans
+ ready -> ready { guard doors.open; sync call?go_to; };
+}
+')
+
+ifdef(`CONTROL', CONTROL, naive)
+
+system async;

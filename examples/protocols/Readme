@@ -1,0 +1,11 @@
+
+Protocols
+
+These are simple, small protocols...
+
+parameters:
+- normaly the channel is loosy
+- with parameter it can be bounded loosy (it can loose at most N messages in row)
+
+properties:
+- ...

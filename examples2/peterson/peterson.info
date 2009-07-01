@@ -1,0 +1,14 @@
+Peterson
+----------
+Models peterson solution of mutual exclusion of concurent processes.
+Modeled by Radek Pelanek.
+
+peterson_bigerror.mdve -- model modified to contain quite a big error
+			  (in particular, j:=j+1 changed to j:=j)
+
+Parameters:
+-----------
+N=x -- the number of processes (defautl N=3)
+ERROR=0,1 -- set ERROR to 1 to model an error in the protocol (default ERROR=0)
+LOOPS=0,1 -- set LOOPS to 1 to allow each process to stay in critical section 
+for an arbitrary number of steps (default LOOPS=0)

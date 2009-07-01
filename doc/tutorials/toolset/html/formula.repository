@@ -1,0 +1,3 @@
+\form#0:$\left\{\begin{array}{ll} 2^x & \mbox{if } x<33 \\ x & \mbox{if } x>=33 \end{array}\right.$
+\form#1:$ \left.\begin{array}{lcl} \mbox{model.mdve} & \stackrel{(preprocesor)}{\longrightarrow} & \mbox{model.dve}\\ \mbox{model.mltl} & \stackrel{(preprocesor)}{\longrightarrow} & \mbox{model.ltl} \end{array}\right\} \stackrel{combine}{\longrightarrow} \mbox{model.prop1.dve, model.prop2.dve, \dots} $
+\form#2:$ \mbox{model.cpp.pml} \stackrel{preprocessor}{\longrightarrow} \mbox{model.pml} \stackrel{pml2s}{\longrightarrow} \mbox{model.pml.s} \stackrel{nips\_asm.pl}{\longrightarrow} \mbox{model.pml.b} $

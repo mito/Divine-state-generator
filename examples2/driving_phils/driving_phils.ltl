@@ -1,0 +1,32 @@
+Atomic propositions
+-------------------
+Process i holds a resouces:
+  #define a00 (res0[0] != -1)
+  #define a10 (res1[0] != -1)
+  ...
+
+Processes i and j do not share the same resource:
+  #define b01 (res0[0] != res0[1] && res0[0] != res1[1] && res1[0] != res0[1] && res1[0] != res1[1])
+  ...
+
+Process i is requesting
+  #define ac0 (acquiring[0] != -1)
+  ...
+
+Process i is not requesting
+  #define gr0 (acquiring[0] == -1)
+  ...
+
+Verified formulas
+-----------------
+(1) Processes 0 and 1 cannot share the same resource:
+  #property G(a00->b01)
+
+(2) If process 0 has exactly one resouces, it is placed in proper place
+  #property G(a10->a00)
+
+(3) If process 0 requests a resource it will be granted to him eventually
+  #property G(ac0->Fgr0)
+
+(4) Process 0 is granted a resource infinitely many times
+  #property GFac0

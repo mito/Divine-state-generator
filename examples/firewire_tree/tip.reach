@@ -1,0 +1,16 @@
+{
+{ F (a && b && c)}
+a := Node_0.finish;
+b := Node_1.finish;
+c := Node_2.finish;
+}
+
+{ node 0 can be elected
+{ F a }
+a := elected == 0;
+}
+
+{ reachability of error state
+{ F a }
+a := Node_0.error_st;
+}

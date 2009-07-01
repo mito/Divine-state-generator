@@ -1,0 +1,13 @@
+leader election
+---------------
+Transcripted from the SPIN leader election model by Radek Pelanek and Jiri
+Barnat. Initial numbers assigned to processes are randomly initialized,
+maximal number of processes is 64.
+
+Parameters
+----------
+N=x  -- the number of processes (default N=3)
+
+Properties
+----------
+see leader_election.ltl

@@ -1,0 +1,25 @@
+Driving Philosophers
+--------------------
+Designed by Jiri Simsa. Motivated by the model described in "The Driving
+Philosophers" by S. Baehmi, R. Baldoni, R. Guerraoui and B. Pochon. It
+allows for mutual exclusion of processes accessing several resources.
+
+Parameters
+----------
+N ... the number of processes (default 2) 
+K ... the number of resources (default 2)
+MUTEX == 0 : no mutual exclusion
+         1 : mutual exclusion (default)
+FAIR == 0 : processes can starve (default)
+        1 : no starvation (future work)
+R ... the number of rounds (default 10) 
+      is meaningful only if FAIR == 1
+DELTA ... upper bound for starving (default 10) 
+          is meaningful only if FAIR == 1
+
+BIB Entry:
+
+@misc{ guerraoui-driving,
+  author = "Baehni Baldoni Guerraoui",
+  title = "The Driving Philosophers",
+  url = "citeseer.ist.psu.edu/669856.html" }

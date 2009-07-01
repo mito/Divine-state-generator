@@ -1,0 +1,37 @@
+Seznam souboru:
+  Implementace algoritmu:
+    andersons.mdve
+    bakery.mdve
+    mcs.mdve
+    peterson.mdve
+  Vlastnosti:
+    prop.mdve (jsou tam parametrizovane formule (ktere jsou mozna pitome, ale chtel jsem, aby tam byly i nejake "vetsi" formule))
+
+Zajimave stavy implementaci:
+  NCS - nekriticka sekce
+  CS - kriticka sekce
+
+Zajimave parametry implementaci algoritmu:
+  N - pocet procesu
+  LOOPS - priznak, jestli proces muze cyklit v NCS (tj. jestli tam bude pravidlo typu NCS -> NCS)
+
+Zajimave promenne v implementacich algoritmu:
+  byte in_critical - proces pricte 1 pri vstupu do CS (a odecte pri vystupu)
+  byte active - kazdy proces pri kazdem kroku nastavi na $1
+  byte waiting[N] - pokud proces projevi zajem o vstup do CS (tj. opusti NCS) tak nastavi waiting[$1] na 1 a pri vstupu do CS nastavi waiting[$1] na 0
+
+Parametry vlastnosti:
+  L - pocet procesu (POZOR! jinak nez u implementaci! :-))
+
+Vlastnosti:
+  1) (naivni) pro kazdy proces plati, ze vzdy kdyz ceka na CS tak se docka (v konecnem case)
+  2) pro kazdy proces plati, ze pokud je nekonecnekrat aktivni, pak ceka-li na CS, tak se docka
+  3) (naivni) kazdy proces je nekonecnekrat v kriticke sekci
+  4) (skoro naivni) pro kazdy proces plati, ze pokud je nekonecnekrat aktivni pak je nekonecnekrat v CS
+  5) pro kazdy proces plati, ze pokud nekonecnekrat ceka na CS a zaroven je aktivni, pak je nekonecnekrat v CS
+  6) vzdy bude nejvyse jeden proces v CS
+  7) pro kazdy proces P_i kde i>0 globalne plati, ze nenastane situace, ze by P_0 cekal na CS, nasledne by se do CS dostal 
+     P_i, pak by P_0 furt cekal a znovu by byl predbehnut P_i 
+
+  
+

@@ -1,0 +1,10 @@
+Dining philosophers
+--------------------
+The standard problem. Modeled by Radek Pelanek.
+
+Parameters
+----------
+N=x 	 -- the number of philosophers (default N=4)
+LEFT=0/1 -- if there is one left handed philosopher (default LEFT=0)
+ROOM=x	 -- solution with limited room, parameter gives the capacity of 
+            the room, if x=0 then room is not considered (default ROOM=0)

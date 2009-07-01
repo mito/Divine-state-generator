@@ -1,0 +1,57 @@
+Measuring resistance
+There are three modeled systems that simulates real complex system for testing the
+quality of the cables using in some Czech factories. One device is intended for accurate
+measuring of resistance on cables. The other device generates high voltage and this
+device is in safety cage together with long cabels (for example 10 km) containing
+several wires. One computer maintains all other systems - access to safety cage,
+safety lights, measuring of resistance, high voltage, results processing, etc.
+Real situation is rough-casted in model.png or model.svg file.
+
+ * Algorithm simulates software for controlling all devices.
+ * Device_state shows the states in whitch the hardware for measuring resistance is.
+ * Measuring simulates the process of measuring resistance.
+
+The software finds how are several wires conneted in cable using low voltage and 
+resistance measuring, but this functionality is not critical and therefore not modeled.
+
+The modeled Algorithm have to find the best range for the most accurate measuring.
+The Algorithm system asks the Measuring system for actual_resistance using synchronization "m?".
+Then the Algorithm have to test the state of the Device_state system (using qstate channel).
+When the state is "Err7" (the measured resistance is out of the range for sure), the
+Algorithm and Device_state used "err" synchronization. When the state is ok, the
+"ok" synchronization is used.
+
+parameters:
+actual_resistance -- actual value of resistance on wires which is obtained from Measuring system.
+cage_safe -- cage_safe==1 iff the safety cage around the high voltage devices is closed
+             and therefore safe for people.
+range -- range for resistance measuring and should be from 0 to 5.
+         0 coresponds to the smalest resistances
+         5 coresponds to the largest resistances
+
+properties:
+When system Measuring is in the state measure_in_progress the system is under the high voltage.
+There should never happen that cage is not safe (it should be opened) and the system is under high voltage
+at the same time.
+Same people can accidentally go into the cage and it is very danger (voltage value in wires should be 5000 V).
+  A[] (Measuring.measure_in_progress imply cage_safe==1)
+
+The system Algorithm in too_small_resistance state only when all
+possible ranges are tested the range==0 is a minimum.
+  A[] (Algorithm.too_small_resistance imply Algorithm.range==0)
+
+The system Algorithm in too_large_resistance state only when all
+possible ranges are tested the range==5 is a maximum.
+  A[] (Algorithm.too_large_resistance imply Algorithm.range==5)
+
+The resistance is too high when no cable is connected for example.
+  E<> Algorithm.too_large_resistance
+
+The resistance is too small when same wires is incorrectly connected. 
+  E<> Algorithm.too_small_resistance
+
+Algorithm finds the value of resistance correct eventually.
+  E<> Algorithm.correct_value
+
+System is deadlock free.
+  A[] not deadlock

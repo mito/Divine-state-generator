@@ -1,0 +1,1227 @@
+2006-01-18 09:11  xrockai
+
+	Changed:
+		Makefile.am (1.16), "Exp", lines: +0 -2
+
+	Remove sources that are currently not used and tend to break compiles.
+	
+2006-01-18 09:03  xrockai
+
+	Changed:
+		dwi-prepare (1.3), "Exp", lines: +12 -1
+
+	Make the script executable instead of relying on server to run
+	it through sh.
+	
+2006-01-17 15:30  xrockai
+
+	Changed:
+		Makefile.am (1.15), "Exp", lines: +2 -0
+
+	Add DWI source files to distribution tarballs (make dist).
+	
+2006-01-17 10:40  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.11), "Exp", lines: +4 -0
+
+	After object is deleted, automatically select its parent (if it had any).
+	
+2006-01-17 10:32  xrockai
+
+	Changed:
+		store/clusters (1.5), "Exp", lines: +15 -0
+
+	Add parsecs cluster. Does not work yet, the divine installation there
+	needs to be updated to current cvs, with --enable-gui (since the
+	helper programs are not built otherwise).
+	
+2006-01-17 10:23  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.10), "Exp", lines: +6 -4
+
+	Disable delete action for running tasks and their algorithms.
+	
+2006-01-17 10:21  xrockai
+
+	Changed:
+		src/divine/common/Cluster.java (1.7), "Exp", lines: +5 -1
+
+	Make abort() work even on process that is hanging in "running" state even
+	if it is not really running anymore.
+	
+2006-01-17 09:13  xrockai
+
+	Changed:
+		src/divine/common/Algorithm.java (1.8), "Exp", lines: +1 -1
+		src/divine/common/Cluster.java (1.6), "Exp", lines: +2 -1
+
+	Really fix the overwrite-output-on-abort problem and append Aborted to
+	the right output, too.
+	
+2006-01-17 09:04  xrockai
+
+	Changed:
+		src/divine/common/Algorithm.java (1.7), "Exp", lines: +1 -1
+		src/divine/common/Cluster.java (1.5), "Exp", lines: +1 -1
+
+	Abort on server shall set the dirty flag on the algorithm, so that the
+	client actually receives the updated status. Also preserve the output
+	of an aborted algorithm, just append "Aborted" to the end of Output tab.
+	
+2006-01-17 08:55  xrockai
+
+	Changed:
+		src/divine/client/AlgorithmPanel.java (1.3), "Exp", lines: +12 -5
+
+	Put Report in its own tab in algorithm output viewer. Show meaningful
+	text instead of "null" when a given part of output is not yet
+	available.
+	
+2006-01-17 08:45  xrockai
+
+	Changed:
+		src/divine/client/DvePropertyPanel.java (1.2), "Exp", lines: +10 -3
+		src/divine/client/PropertyPanel.java (1.3), "Exp", lines: +6 -16
+
+	When a formula is loaded from file, the property panel is updated now.
+	
+2006-01-17 08:31  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.9), "Exp", lines: +10 -6
+		src/divine/common/NameMap.java (1.2), "Exp", lines: +15 -0
+		src/divine/common/Task.java (1.15), "Exp", lines: +1 -6
+
+	Fix spurious recreation of panels that made the client rather unusable
+	while algorithms were running.
+	
+2006-01-17 07:03  xrockai
+
+	Changed:
+		README (1.2), "Exp", lines: +1 -1
+		src/divine/common/Task.java (1.14), "Exp", lines: +0 -13
+
+	Update todo list in README, remove more old code.
+	
+2006-01-17 00:42  xrockai
+
+	Changed:
+		make-client-zip.sh (1.3), "Exp", lines: +2 -2
+
+	Update the client zipfile generator.
+	
+2006-01-17 00:42  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.8), "Exp", lines: +28 -25
+		src/divine/client/ModelPanel.java (1.3), "Exp", lines: +0 -1
+
+	Implement the event/update list at the bottom of the client window.
+	Get rid of usedFont, it was never actually used anyway.
+	
+2006-01-17 00:40  xrockai
+
+	Changed:
+		src/divine/common/Algorithm.java (1.6), "Exp", lines: +0 -4
+
+	Remove old commented out code.
+	
+2006-01-15 20:00  xrockai
+
+	Changed:
+		src/divine/common/Algorithm.java (1.5), "Exp", lines: +1 -0
+		src/divine/common/User.java (1.7), "Exp", lines: +14 -0
+
+	Free up user data in server on logout, iff there are no tasks
+	running. If tasks are running, we keep the user in memory and we do
+	not overrun the in-memory data on next login either.
+	
+2006-01-15 19:58  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.7), "Exp", lines: +5 -3
+
+	Formatting++. Disable execute/abort on algorithm nodes for now (we
+	do not implement individual algorithm execute/abort yet).
+	
+2006-01-15 18:10  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.6), "Exp", lines: +5 -2
+
+	Changing font size does not break the tree labels anymore.
+	
+2006-01-15 17:26  xrockai
+
+	Changed:
+		dwi-run.cpp (1.7), "Exp", lines: +17 -0
+
+	Make dwi-run clean up its mess (working directory) upon exit.
+	
+2006-01-15 17:16  xrockai
+
+	Changed:
+		src/divine/common/Cluster.java (1.4), "Exp", lines: +28 -3
+		src/divine/common/Computer.java (1.4), "Exp", lines: +3 -0
+
+	Implement parts of cluster monitor: the refresher thread works now. We
+	are missing load parser and client/server communication on the subject.
+	
+2006-01-15 17:15  xrockai
+
+	Changed:
+		src/divine/common/Wired.java (1.3), "Exp", lines: +3 -3
+
+	Reduce logging output.
+	
+2006-01-15 16:58  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.5), "Exp", lines: +4 -16
+
+	Remove change password/edit users button from toolbar. Make it compile, too.
+	
+2006-01-15 16:55  xrockai
+
+	Changed:
+		store/clusters (1.4), "Exp", lines: +1 -0
+
+	Set the work directory for paradise cluster.
+	
+2006-01-15 16:26  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.4), "Exp", lines: +1 -67
+
+	Reduce obsolete code.
+	
+2006-01-15 16:03  xrockai
+
+	Changed:
+		src/divine/client/JNewClient.java (1.3), "Exp", lines: +33 -25
+
+	Parts of the tree no longer collapse when updates from server are received.
+	
+2006-01-15 15:35  xrockai
+
+	Changed:
+		src/divine/client/AlgorithmPanel.java (1.2), "Exp", lines: +45 -6
+		src/divine/client/JNewClient.java (1.2), "Exp", lines: +13 -7
+		src/divine/client/ModelPanel.java (1.2), "Exp", lines: +1 -1
+		src/divine/client/PlainTextViewerPanel.java (1.2), "Exp", lines: +10 -43
+		src/divine/client/PropertyPanel.java (1.2), "Exp", lines: +1 -1
+		src/divine/client/TaskPanel.java (1.2), "Exp", lines: +1 -1
+
+	Implement tabbed algorithm output viewer. Only current values from log are
+	shown in the Log tab. The whole output is still present in Everything (Debug)
+	tab.
+	
+2006-01-15 15:32  xrockai
+
+	Changed:
+		src/divine/common/Logger.java (1.2), "Exp", lines: +3 -2
+
+	Use printStackTrace() in Logger instead of custom format.
+	
+2006-01-15 14:00  xrockai
+
+	Changed:
+		src/divine/common/Request.java (1.2), "Exp", lines: +3 -1
+		src/divine/common/Wired.java (1.2), "Exp", lines: +19 -10
+
+	Resolve the performance problems with client. Due to the way how java handles
+	Strings, the unprefix method was roughly O(m*n^3) in n number of lines per value
+	and m number of values. It should now run in O(m*n). Some logarithms may be
+	involved due to the map lookups. Overall result roughly in O(m*n*log(m)) if
+	i count right.
+	
+2006-01-15 12:56  xrockai
+
+	Added:
+		build/.cvsignore (1.1)
+	Changed:
+		.cvsignore (1.3), "Exp", lines: +3 -1
+
+	update cvsignore
+	
+2006-01-15 12:51  xrockai
+
+	Deleted:
+		src/dom4j-1.4.jar (1.4)
+	Changed:
+		Makefile.am (1.14), "Exp", lines: +1 -1
+		testsuite-start.sh (1.4), "Exp", lines: +1 -1
+
+	Cleaning up: Drop nbproject (obsolete). Drop dom4j as it is not used anymore.
+	
+2006-01-15 12:46  xrockai
+
+	Deleted:
+		build.xml (1.2)
+	Added:
+		src/divine/client/AlgorithmPanel.java (1.1)
+		src/divine/client/AlgorithmSetupPanel.java (1.1)
+		src/divine/client/ClusterDetailsDialog.java (1.1)
+		src/divine/client/DvePropertyPanel.java (1.1)
+		src/divine/client/GraphPanel.java (1.1)
+		src/divine/client/JLogin.java (1.1)
+		src/divine/client/JNewClient.java (1.1)
+		src/divine/client/ModelPanel.java (1.1)
+		src/divine/client/PlainTextViewerPanel.java (1.1)
+		src/divine/client/PropertyPanel.java (1.1)
+		src/divine/client/RecentLogPanel.java (1.1)
+		src/divine/client/TaskPanel.java (1.1)
+		src/divine/client/others/AlgorithmChangedNotifier.java (1.1)
+		src/divine/client/others/DesignableTreeCellRenderer.java (1.1)
+		src/divine/client/others/ExtensionFilter.java (1.1)
+		src/divine/common/Logger.java (1.1)
+		src/divine/common/NameMap.java (1.1)
+		src/divine/common/Protocol.java (1.1)
+		src/divine/common/Request.java (1.1)
+		src/divine/common/Wired.java (1.1)
+	Changed:
+		ChangeLog (1.2), "Exp", lines: +815 -102
+		Makefile.am (1.13), "Exp", lines: +15 -15
+		make-client-zip.sh (1.2), "Exp", lines: +1 -1
+		server-start.sh (1.2), "Exp", lines: +1 -1
+		src/divine/common/Algorithm.java (1.4), "Exp", lines: +313 -212
+		src/divine/common/Cluster.java (1.3), "Exp", lines: +172 -168
+		src/divine/common/Computer.java (1.3), "Exp", lines: +47 -167
+		src/divine/common/Global.java (1.3), "Exp", lines: +24 -63
+		src/divine/common/Model.java (1.3), "Exp", lines: +83 -154
+		src/divine/common/Property.java (1.3), "Exp", lines: +66 -152
+		src/divine/common/Task.java (1.13), "Exp", lines: +165 -159
+		src/divine/common/User.java (1.6), "Exp", lines: +164 -115
+		src/divine/server/DwiServer.java (1.13), "Exp", lines: +165 -437
+		src/divine/server/DwiSocket.java (1.15), "Exp", lines: +204 -886
+		src/divine/tests/AlgorithmTest.java (1.6), "Exp", lines: +1 -1
+		src/divine/tests/ModelTest.java (1.3), "Exp", lines: +1 -1
+		src/divine/tests/NameMapTest.java (1.7), "Exp", lines: +1 -1
+		src/divine/tests/PropertyTest.java (1.3), "Exp", lines: +1 -1
+		src/divine/tests/RequestTest.java (1.3), "Exp", lines: +1 -1
+		src/divine/tests/UserTest.java (1.2), "Exp", lines: +1 -1
+		src/divine/tests/WiredTest.java (1.2), "Exp", lines: +1 -1
+
+	(Finally) strip the cz.muni.fi prefix. The packages are now rooted under
+	divine. Drop build.xml which is not used anymore. Update ChangeLog. Update
+	files that referred to cz.muni.fi.divine.
+	
+2006-01-15 12:12  xrockai
+
+	Added:
+		dwi-cluster-load (1.1)
+	Changed:
+		Makefile.am (1.12), "Exp", lines: +3 -2
+
+	Implement the cluster-gateway portion of the cluster monitor. This will
+	be run through dwi-run and the input is list of hostnames to check. Output
+	is a map hostname: load.
+	
+2006-01-15 11:37  xrockai
+
+	Changed:
+		dwi-prepare (1.2), "Exp", lines: +15 -6
+
+	Support .pml format, pass around absolute paths since mpirun tends
+	to break otherwise. Pass log/report arguments by default.
+	
+2006-01-11 09:49  xrockai
+
+	Added:
+		build/dummy (1.1)
+
+	Add a dummy file to ensure that CVS does not prune the build directory.
+	
+2006-01-09 21:26  xrockai
+
+	Changed:
+		store/clusters (1.3), "Exp", lines: +1 -6
+
+	Update clusters file to match current divineuser@anna setup.
+	
+2006-01-09 21:17  xrockai
+
+	Deleted:
+		client-start (1.3)
+		server-start (1.4)
+	Added:
+		server-start.sh (1.1)
+
+	A new script suitable for running the server in real (non-testing) situations.
+	This shall be used to run the server on divineuser@anna.fi.muni.cz. It currently
+	uses the in-build-tree copy of class files, no standalone server so far.
+	
+2006-01-09 21:11  xrockai
+
+	Added:
+		make-client-zip.sh (1.1)
+
+	Add a script to build a zipfile with all required files (currently a
+	jarfile, truststore and a shell script to run the client).
+
+	There is a copy of the resulting zip available on:
+	http://lorien.mornfall.net:8012/m/divine-dwi-0.1.zip
+
+	I will add an README with some basic instructions on how
+	to run the client.
+	
+2006-01-07 14:13  xrockai
+
+	Changed:
+		dwi-run.cpp (1.6), "Exp", lines: +37 -21
+
+	Implement periodic updates of algorithm instance output. Allows for
+	plotting the logs in nearly real time.
+	
+2006-01-07 14:11  xrockai
+
+	Changed:
+		store/passwd (1.2), "Exp", lines: +0 -2
+
+	Use the new format here, too. Makes server not choke in default (pristine cvs)
+	setup.
+	
+2006-01-03 09:12  xrockai
+
+	Changed:
+		src/divine/tests/AlgorithmTest.java (1.5), "Exp", lines: +2 -2
+
+	Compile.
+	
+2006-01-03 00:35  xrockai
+
+	Added:
+		README (1.1)
+		dwi-prepare (1.1)
+	Changed:
+		Makefile.am (1.11), "Exp", lines: +7 -26
+		dwi-run.cpp (1.5), "Exp", lines: +12 -6
+		src/divine/tests/AlgorithmTest.java (1.4), "Exp", lines: +2 -2
+		src/divine/tests/NameMapTest.java (1.6), "Exp", lines: +23 -7
+		store/algorithms (1.3), "Exp", lines: +7 -16
+		store/clusters (1.2), "Exp", lines: +6 -5
+
+	Merge offline changes:
+	* wrote a README which includes a short summary of working features
+	  and an incomplete todo list plus some random notes
+	* dropped lots of obsolete code
+	* dropped all the .form files
+	* NameMap wire format does not need name: to be included explicitly anymore
+	* NameMap.Element is now a class not interface (code reuse)
+	* NameMap elements now form a sort of object tree (where children are
+	  always grouped into NameMaps which are themselves named, so we can
+	  construct named paths in the tree)
+	* Property and Model types and Algorithm.Instance states are now properly
+	  (de)serialized
+	* both client and server now use User to manage the object tree
+	* new class Cluster.Executable, for objects that are executable on a cluster
+	  - Algorithm.Instance is derived from Cluster.Executable
+	  - the class provides a mechanism to invoke dwi-run on the cluster
+	    ond feed data to it
+	* introduced new helper script dwi-prepare
+	  - simplifies parameter handling in dwi a lot
+	  - this is executed through dwi-run, with all input data like algorithm
+	    name, arguments, model or property and writes out a shell script
+		that when executed carries out all the tasks of algorithm invocation:
+		combine or preprocess or bytecode compiler for promela and the
+		algorithm itself with translated arguments
+	* (re)implemented change polling in client -- server keeps track of "dirty"
+	  tasks and can send them on demand to the client (clearing their dirty
+	  status); dirty is set when task state changes
+	* reimplemented client font change mechanism
+	* new user interface for setting up Tasks:
+	  - arbitrary number of Algorithm.Instances can be added
+	  - each Algorithm.Instance is assigned to a cluster individually
+	* algorithm output is currently presented as flat text
+	* task abortion (relies on mpirun to reap its children -- seems to work)
+	* reimplemented panel locking mechanism
+	* fixed tree syncing in client to not interfere with selection and
+	  expansion status of the GUI tree
+	* fixed document change handling so that changing model or property
+	  is reflected immediately in the client's object tree -- therefore
+	  storing the model will store what are you looking at
+	* reimplement object renaming (based on copy+delete)
+	* various code cleanups and refactors
+	* update the example store/ files to current format
+	
+2005-12-21 10:08  xrockai
+
+	Changed:
+		dwi-run.cpp (1.4), "Exp", lines: +1 -0
+
+	Fix compilation on some systems (should fix Jirik's compile).
+	
+2005-12-21 05:07  xrockai
+
+	Changed:
+		store/algorithms (1.2), "Exp", lines: +3 -0
+
+	Add distr_reachability (good for testing).
+	
+2005-12-21 04:23  xrockai
+
+	Changed:
+		dwi-run.cpp (1.3), "Exp", lines: +38 -10
+
+	The helper can now collect and send back the outputs. This means the runner
+	is nearly complete. Fix up formatting, too :).
+	
+2005-12-20 21:03  xrockai
+
+	Changed:
+		src/divine/tests/NameMapTest.java (1.5), "Exp", lines: +19 -4
+
+	Add object ownership right to NameMap. Much more reliable. All bugs
+	related to objects losing their parents should be eliminated now.
+	
+2005-12-20 19:45  xrockai
+
+	Changed:
+		dwi-run.cpp (1.2), "Exp", lines: +15 -4
+
+	Be more verbose (on stderr). More failure modes. Create directories with
+	mode 0770 not 0700.
+	
+2005-12-20 19:33  xrockai
+
+	Changed:
+		src/divine/tests/AlgorithmTest.java (1.3), "Exp", lines: +1 -1
+
+	Compile.
+	
+2005-12-20 13:54  xrockai
+
+	Changed:
+		server-start (1.3), "Exp", lines: +1 -1
+
+	Since the server main() method got cut down considerably, the arguments
+	are no longer needed. Some argument parsing will be reinsated later.
+	
+2005-12-20 13:54  xrockai
+
+	Added:
+		store/algorithms (1.1)
+		store/clusters (1.1)
+		store/passwd (1.1)
+
+	Add a server configuration example. Server needs those files to be
+	able to work. The algorithm/cluster/password lists are read from
+	there. The location is currently hardcoded to
+	$HOME/divine/dwi/store. This will be made configurable at some point.
+	
+2005-12-20 13:52  xrockai
+
+	Deleted:
+		conf/algorithms.dtd (1.2)
+		conf/algorithms.xml (1.3)
+		conf/computers.xml (1.4)
+		conf/users.xml (1.2)
+
+	The XML files are no longer used. Server uses a bunch of flat text files
+	to store data (using the wire format).
+	
+2005-12-20 13:29  xrockai
+
+	Added:
+		dwi-run.cpp (1.1)
+	Changed:
+		Makefile.am (1.10), "Exp", lines: +6 -0
+
+	Implement (first part of) cluster-side helper program (runner).
+	
+2005-12-13 05:48  xrockai
+
+	Changed:
+		src/divine/tests/AlgorithmTest.java (1.2), "Exp", lines: +12 -0
+
+	Implement the Algorithm(.Instance) split. This makes the server almost
+	secure (still need to implement proper escape(), the current one is
+	probably missing some cases). Argument handling is still somewhat
+	broken.
+	
+2005-12-13 04:16  xrockai
+
+	Added:
+		ChangeLog (1.1)
+
+	Create ChangeLog by perusing cvs2cl.
+	
+2005-12-13 02:44  xrockai
+
+	Added:
+		src/divine/tests/AlgorithmTest.java (1.1)
+	Changed:
+		src/divine/tests/CommonSuite.java (1.4), "Exp", lines: +1 -0
+
+	First go at shell escaping in Algorithm.
+	
+2005-12-10 02:17  xrockai
+
+	Changed:
+		Makefile.am (1.9), "Exp", lines: +3 -3
+
+	Drop StopServer/StopSocket, this is definitely not the way to
+	go. Update Makefile.am, the code should now compile by default out of
+	CVS (without manual tweaking, yay!). From the major components, we are
+	currently missing only the Runner i think. The rest should be fixing
+	up bigger or smaller breakage and implementing secondary features.
+	
+2005-12-09 00:12  xrockai
+
+	Added:
+		src/divine/tests/UserTest.java (1.1)
+	Changed:
+		src/divine/tests/CommonSuite.java (1.3), "Exp", lines: +1 -0
+
+	Implement User.Store, used via User's store() method, which implements
+	Wired.Interface allowing you to read User data from file.
+	
+2005-12-08 18:51  xrockai
+
+	Changed:
+		Makefile.am (1.8), "Exp", lines: +5 -27
+
+	Refactoring continues. Both server and client now compile and login
+	almost works (apart from the detail that the user database in server
+	is broken currently, to be restorted).
+
+	Summary of changes:
+	- everything that compiles got converted to the new core set of
+	  classes (model, task, ...)
+	- ModelType and PropertyType are now nested in their "owner" classes:
+	  Model.Type and Property.Type
+	- JNewClient is now responsible for the object tree and object<->node
+	  association, not the objects themselves
+	- everything using the old protocol is now either converted to new or
+	  commented out
+	- (some things i have probably forgotten)
+
+	Lots of things broken. Server databases will be fixed next, so that
+	login and listings work again.
+	
+2005-12-08 00:21  xrockai
+
+	Changed:
+		src/divine/tests/PropertyTest.java (1.2), "Exp", lines: +15 -0
+
+	Task serialisation using the new system. Minor fixes to related
+	classes.
+	
+2005-12-07 19:13  xrockai
+
+	Changed:
+		src/divine/tests/ModelTest.java (1.2), "Exp", lines: +22 -0
+
+	Implement dewiring of Model. This needed changes to Wired to get
+	default type for map template. This is implemented as a special key in
+	the template, called fromWire-template-default.
+	
+2005-12-07 18:41  xrockai
+
+	Changed:
+		src/divine/tests/NameMapTest.java (1.4), "Exp", lines: +29 -0
+
+	Shift add/drop/rename functionality from Model to NameMap, it is not
+	specific to properties at all and we'll want to use it in Property and
+	Cluster as well. Test the new NameMap functions, too.
+	
+2005-12-07 18:21  xrockai
+
+	Changed:
+		src/divine/tests/NameMapTest.java (1.3), "Exp", lines: +5 -0
+
+	Few more cases for the uniqueName test. Also check it's correct for
+	names not present in the Map.
+	
+2005-12-07 18:19  xrockai
+
+	Added:
+		src/divine/tests/ModelTest.java (1.1)
+	Changed:
+		src/divine/tests/CommonSuite.java (1.2), "Exp", lines: +1 -0
+		src/divine/tests/NameMapTest.java (1.2), "Exp", lines: +11 -5
+
+	Add first Model test (test handling Properties). Add a test for
+	NameMap.uniqueName() and fix the bug in it. Fix addProperty/setModel
+	disagreement between Property and Model (renaming setModel to
+	setModelInternal).
+	
+2005-12-07 18:04  xrockai
+
+	Added:
+		src/divine/tests/CommonSuite.java (1.1)
+		src/divine/tests/PropertyTest.java (1.1)
+	Changed:
+		testsuite-start.sh (1.3), "Exp", lines: +2 -25
+		src/divine/tests/RequestTest.java (1.2), "Exp", lines: +0 -8
+
+	Create a TestSuite for all of the divine.common package and make
+	testsuite-start.sh (that means make check) run it. Add first test for
+	Property class.
+	
+2005-12-07 14:35  xrockai
+
+	Changed:
+		testsuite-start.sh (1.2), "Exp", lines: +20 -2
+
+	Update the testsuite helper to new test location and add NameMapTest
+	to it.
+	
+2005-12-07 14:34  xrockai
+
+	Added:
+		src/divine/tests/NameMapTest.java (1.1)
+
+	Implement (and test) NameMap, a Map that associates (named) objects
+	to their names in the map.
+	
+2005-12-07 14:33  xrockai
+
+	Added:
+		src/divine/tests/RequestTest.java (1.1)
+		src/divine/tests/WiredTest.java (1.1)
+	Changed:
+		Makefile.am (1.7), "Exp", lines: +90 -80
+
+	Move tests out of cz....fi.divine.common to divine.tests. Contemplate
+	dropping the (IMO superfluous) cz.muni.fi prefix for non-test classes
+	as well. Tidy up the makefile a bit, too.
+	
+2005-12-06 19:39  xrockai
+
+	Changed:
+		Makefile.am (1.6), "Exp", lines: +2 -0
+
+	New and even better serialisation implementation. I don't expect many
+	changes to it anymore. The Request class needs to be ported over and
+	so does the current client/server code. However, after adding few bits
+	of convenience API, this should be pretty easy (lot easier than from
+	the original code to current API).
+
+	This also means that the serialisation of individual entities
+	(algorithms, clusters, computers, etc.) can be reimplemeted,
+	analogically to what happened to lower layer of he protocol. This is
+	probably the last major step in general protocol reliability fixes.
+	
+2005-11-30 01:57  xrockai
+
+	Changed:
+		Makefile.am (1.5), "Exp", lines: +1 -0
+
+	- start to implement protocol in common.Protocol class (shared between
+	  client and server); implements login now
+	- drop the old (evil) server side of the login/command handler, it will
+	  need to be replaced anyway
+	
+2005-11-29 16:45  xrockai
+
+	Changed:
+		Makefile.am (1.4), "Exp", lines: +0 -2
+
+	Update Makefile.am to exclude files that went away.
+	
+2005-11-29 10:15  xrockai
+
+	Added:
+		testsuite-start.sh (1.1)
+	Changed:
+		Makefile.am (1.3), "Exp", lines: +3 -0
+
+	Let make check run the testsuite.
+	
+2005-11-28 00:36  xrockai
+
+	Changed:
+		Makefile.am (1.2), "Exp", lines: +5 -1
+
+	Update makefile to compile the new Request classes.
+	
+2005-11-28 00:35  xrockai
+
+	Added:
+		src/junit.jar (1.1)
+
+	We need junit for the unit tests, so add it to dwi/src for now.
+	
+2005-11-22 11:19  xrockai
+
+	Changed:
+		.cvsignore (1.2), "Exp", lines: +2 -2
+
+	update cvsignore
+	
+2005-11-22 11:13  xrockai
+
+	Added:
+		Makefile.am (1.1)
+	Changed:
+		client-start (1.2), "Exp", lines: +1 -1
+		server-start (1.2), "Exp", lines: +1 -1
+
+	Compile dwi with automake. Much easier than expected.
+	
+2005-11-14 16:22  xsimece1
+
+	Changed:
+		scripts/combinePromela (1.3), "Exp", lines: +1 -1
+
+	pr2s renamed to pml2s
+	
+2005-11-14 15:53  xbarnat
+
+	Changed:
+		conf/algorithms.xml (1.2), "Exp", lines: +10 -1
+
+	Added OWCTY algorithm to GUI. Repaired DEPS algorithm in GUI.
+	
+2005-11-11 13:32  xbarnat
+
+	Changed:
+		conf/computers.xml (1.3), "Exp", lines: +0 -7
+
+	Removed localhost cluster from DWI cluster configuration.
+	
+2005-11-11 13:21  xbarnat
+
+	Changed:
+		conf/computers.xml (1.2), "Exp", lines: +28 -0
+
+	Updated cluster configuration for parsecs cluster in Aachen.
+	
+2005-11-11 09:48  xrockai
+
+	Changed:
+		scripts/combinePromela (1.2), "Exp", lines: +2 -1
+
+	Use divine's promela compiler
+	
+2005-11-11 09:43  xrockai
+
+	Added:
+		scripts/algorithm (1.1)
+		scripts/combine (1.1)
+		scripts/combinePromela (1.1)
+		scripts/killProcesses (1.1)
+		scripts/logTail (1.1)
+		scripts/myssh (1.1)
+		scripts/preprocessor (1.1)
+		scripts/reachability (1.1)
+		scripts/sshupload (1.1)
+		scripts/syntax (1.1)
+		scripts/syntaxProperty (1.1)
+		scripts/tbndfs (1.1)
+
+	Import server support scripts.
+	
+2005-11-11 09:31  xrockai
+
+	Added:
+		keystore (1.1)
+		server-start (1.1)
+		conf/algorithms.dtd (1.1)
+		conf/algorithms.xml (1.1)
+		conf/computers.xml (1.1)
+		conf/users.xml (1.1)
+		keys/trust.cer (1.1)
+		keys/truststore (1.1)
+	Changed:
+		src/dom4j-1.4.jar (1.3), "Exp", lines: +0 -0
+
+	import auxilliary files
+	
+2005-11-08 13:52  xrockai
+
+	Added:
+		client-start (1.1)
+
+	Add script for starting the client.
+	
+2005-11-08 13:20  xrockai
+
+	Added:
+		build.xml (1.1)
+
+	Add ant buildsystem to cvs.
+	
+2005-10-23 20:34  xrockai
+
+	Added:
+		BUGS (1.1)
+
+	Keep track of bugs.
+	
+2005-10-23 19:32  xrockai
+
+	Added:
+		.cvsignore (1.1)
+
+	ignore
+	
+2005-09-20 15:10  xforejt
+
+	Deleted:
+		src/dom4j-1.4.jar (1.2)
+		src/divine/client/Client.form (1.8)
+		src/divine/client/Client.java (1.14)
+		src/divine/client/JFileManager.form (1.7)
+		src/divine/client/JFileManager.java (1.8)
+		src/divine/client/JPlaintextViewer.form (1.3)
+		src/divine/client/JPlaintextViewer.java (1.3)
+		src/divine/client/JSyntaxCheck.form (1.5)
+		src/divine/client/JSyntaxCheck.java (1.6)
+		src/divine/client/JTaskViewer.form (1.4)
+		src/divine/client/JTaskViewer.java (1.4)
+		src/divine/client/TaskInfo.java (1.3)
+		src/divine/common/Algorithm.java (1.3)
+		src/divine/common/Cluster.java (1.2)
+		src/divine/common/Computer.java (1.2)
+		src/divine/common/FilenameFilterOwner.java (1.3)
+		src/divine/common/Global.java (1.2)
+		src/divine/common/INamedObject.java (1.2)
+		src/divine/common/Model.java (1.2)
+		src/divine/common/ModelType.java (1.2)
+		src/divine/common/ProgramArgument.java (1.7)
+		src/divine/common/Property.java (1.2)
+		src/divine/common/PropertyType.java (1.2)
+		src/divine/common/RunState.java (1.2)
+		src/divine/common/Task.java (1.12)
+		src/divine/common/User.java (1.5)
+		src/divine/common/package.html (1.2)
+		src/divine/server/AlgorithmWatcherThread.java (1.2)
+		src/divine/server/CannotCombineException.java (1.2)
+		src/divine/server/DwiServer.java (1.12)
+		src/divine/server/DwiSocket.java (1.14)
+		src/divine/server/ProcessCleaner.java (1.2)
+		src/divine/server/StopServer.java (1.2)
+		src/divine/server/StopSocket.java (1.3)
+		src/divine/server/UserLoad.java (1.8)
+		src/divine/server/package.html (1.2)
+
+	anged directory structure
+	
+2005-08-24 12:31  xforejt
+
+	Added:
+		src/divine/common/Cluster.java (1.1)
+		src/divine/common/Computer.java (1.1)
+		src/divine/common/Global.java (1.1)
+		src/divine/common/INamedObject.java (1.1)
+		src/divine/common/Model.java (1.1)
+		src/divine/common/ModelType.java (1.1)
+		src/divine/common/Property.java (1.1)
+		src/divine/common/PropertyType.java (1.1)
+		src/divine/common/RunState.java (1.1)
+		src/divine/common/package.html (1.1)
+		src/divine/server/AlgorithmWatcherThread.java (1.1)
+		src/divine/server/CannotCombineException.java (1.1)
+		src/divine/server/ProcessCleaner.java (1.1)
+		src/divine/server/StopServer.java (1.1)
+		src/divine/server/package.html (1.1)
+
+	Added rest of dwi
+	
+2005-08-24 12:25  xforejt
+
+	Changed:
+		src/divine/common/Algorithm.java (1.2), "Exp", lines: +143 -259
+		src/divine/common/ProgramArgument.java (1.6), "Exp", lines: +48 -36
+		src/divine/common/Task.java (1.11), "Exp", lines: +152 -22
+		src/divine/common/User.java (1.4), "Exp", lines: +126 -20
+		src/divine/server/DwiServer.java (1.11), "Exp", lines: +423 -32
+		src/divine/server/DwiSocket.java (1.13), "Exp", lines: +692 -225
+		src/divine/server/StopSocket.java (1.2), "Exp", lines: +35 -4
+
+	Completely deleted dwi and added the new one
+	
+2005-03-18 13:41  xforejt
+
+	Added:
+		src/divine/common/Algorithm.java (1.1)
+	Changed:
+		src/divine/common/Task.java (1.10), "Exp", lines: +23 -315
+		src/divine/common/User.java (1.3), "Exp", lines: +6 -6
+		src/divine/server/DwiSocket.java (1.12), "Exp", lines: +5 -5
+
+	Added class for stopping server -- not working yet
+	New client
+	Task has different meaning, now contains array of Algorithms (former Task class)
+	
+2005-03-17 07:59  xbrozek
+
+	Changed:
+		src/divine/client/Client.java (1.13), "Exp", lines: +8 -2
+		src/divine/client/JFileManager.form (1.6), "Exp", lines: +3 -0
+		src/divine/client/JFileManager.java (1.7), "Exp", lines: +23 -1
+
+	Added file deletion in JFileManager.
+	
+2005-03-16 09:59  xforejt
+
+	Changed:
+		src/divine/client/TaskInfo.java (1.2), "Exp", lines: +1 -0
+		src/divine/common/FilenameFilterOwner.java (1.2), "Exp", lines: +5 -1
+		src/divine/common/ProgramArgument.java (1.5), "Exp", lines: +1 -1
+		src/divine/common/Task.java (1.9), "Exp", lines: +1 -0
+		src/divine/server/DwiServer.java (1.10), "Exp", lines: +3 -2
+
+	Few comments added
+	
+2005-03-16 09:46  xforejt
+
+	Added:
+		src/divine/server/StopSocket.java (1.1)
+	Changed:
+		src/divine/client/JFileManager.form (1.5), "Exp", lines: +6 -0
+		src/divine/client/JFileManager.java (1.6), "Exp", lines: +21 -1
+		src/divine/client/JSyntaxCheck.form (1.4), "Exp", lines: +22 -12
+		src/divine/client/JSyntaxCheck.java (1.5), "Exp", lines: +31 -13
+		src/divine/server/DwiServer.java (1.9), "Exp", lines: +7 -2
+		src/divine/server/DwiSocket.java (1.11), "Exp", lines: +53 -16
+		src/divine/server/UserLoad.java (1.7), "Exp", lines: +2 -2
+
+	StopServer class added -- neither used nor tested yet
+	Added some comments to DwiSocket
+	
+2005-03-14 13:54  xbrozek
+
+	Changed:
+		src/divine/client/JFileManager.form (1.4), "Exp", lines: +14 -1
+		src/divine/client/JFileManager.java (1.5), "Exp", lines: +19 -3
+
+	Fixed some bugs.
+	
+2005-03-14 13:39  xbrozek
+
+	Changed:
+		src/divine/client/JFileManager.form (1.3), "Exp", lines: +1 -1
+		src/divine/client/JFileManager.java (1.4), "Exp", lines: +16 -11
+
+	Added functionality -- communicatig with server.
+	
+2005-03-14 12:53  xforejt
+
+	Changed:
+		src/divine/client/JFileManager.form (1.2), "Exp", lines: +1 -1
+		src/divine/client/JFileManager.java (1.3), "Exp", lines: +5 -1
+
+	JFileManager returns dummy value
+	
+2005-03-14 12:49  xforejt
+
+	Changed:
+		src/divine/client/Client.form (1.7), "Exp", lines: +3 -0
+		src/divine/client/Client.java (1.12), "Exp", lines: +22 -4
+		src/divine/client/JFileManager.java (1.2), "Exp", lines: +13 -1
+		src/divine/client/JPlaintextViewer.form (1.2), "Exp", lines: +2 -2
+		src/divine/client/JPlaintextViewer.java (1.2), "Exp", lines: +10 -3
+		src/divine/client/JSyntaxCheck.form (1.3), "Exp", lines: +2 -2
+		src/divine/client/JSyntaxCheck.java (1.4), "Exp", lines: +5 -4
+		src/divine/client/JTaskViewer.form (1.3), "Exp", lines: +1 -1
+		src/divine/client/JTaskViewer.java (1.3), "Exp", lines: +6 -5
+		src/divine/common/ProgramArgument.java (1.4), "Exp", lines: +7 -20
+		src/divine/common/Task.java (1.8), "Exp", lines: +8 -9
+		src/divine/server/DwiServer.java (1.8), "Exp", lines: +6 -0
+		src/divine/server/DwiSocket.java (1.10), "Exp", lines: +42 -3
+
+	Some JFrames changed to JDialogs
+	
+2005-03-10 17:15  xforejt
+
+	Added:
+		src/divine/client/JPlaintextViewer.form (1.1)
+		src/divine/client/JPlaintextViewer.java (1.1)
+		src/divine/client/TaskInfo.java (1.1)
+	Changed:
+		src/divine/client/Client.form (1.6), "Exp", lines: +13 -0
+		src/divine/client/Client.java (1.11), "Exp", lines: +19 -0
+		src/divine/client/JSyntaxCheck.form (1.2), "Exp", lines: +2 -2
+		src/divine/client/JSyntaxCheck.java (1.3), "Exp", lines: +1 -1
+		src/divine/client/JTaskViewer.form (1.2), "Exp", lines: +7 -0
+		src/divine/client/JTaskViewer.java (1.2), "Exp", lines: +71 -7
+		src/divine/common/Task.java (1.7), "Exp", lines: +18 -1
+		src/divine/common/User.java (1.2), "Exp", lines: +12 -0
+		src/divine/server/DwiSocket.java (1.9), "Exp", lines: +48 -8
+
+	added class for viewing of plaintext
+	some things work now -- check syntax, delete task (not deleting logs yet)
+	
+2005-03-10 11:49  xforejt
+
+	Added:
+		src/divine/client/JTaskViewer.form (1.1)
+		src/divine/client/JTaskViewer.java (1.1)
+		src/divine/common/FilenameFilterOwner.java (1.1)
+	Changed:
+		src/divine/client/JSyntaxCheck.java (1.2), "Exp", lines: +12 -11
+		src/divine/common/Task.java (1.6), "Exp", lines: +62 -29
+		src/divine/server/DwiServer.java (1.7), "Exp", lines: +7 -1
+		src/divine/server/DwiSocket.java (1.8), "Exp", lines: +127 -63
+
+	Part of server-side file management
+	Part of Task management
+	Next part of File Syntax
+	
+2005-03-09 20:07  xbrozek
+
+	Added:
+		src/divine/client/JFileManager.form (1.1)
+		src/divine/client/JFileManager.java (1.1)
+
+	First version of filemanager -- without any functionality.
+	
+2005-03-08 12:23  xforejt
+
+	Added:
+		src/divine/client/JSyntaxCheck.form (1.1)
+		src/divine/client/JSyntaxCheck.java (1.1)
+	Changed:
+		src/divine/client/Client.form (1.5), "Exp", lines: +3 -0
+		src/divine/client/Client.java (1.10), "Exp", lines: +57 -11
+		src/divine/common/ProgramArgument.java (1.3), "Exp", lines: +21 -0
+		src/divine/common/Task.java (1.5), "Exp", lines: +5 -17
+		src/divine/server/DwiServer.java (1.6), "Exp", lines: +1 -0
+		src/divine/server/DwiSocket.java (1.7), "Exp", lines: +8 -5
+
+	Syntax check
+	
+2005-03-07 14:11  xforejt
+
+	Changed:
+		src/divine/common/ProgramArgument.java (1.2), "Exp", lines: +2 -2
+		src/divine/common/Task.java (1.4), "Exp", lines: +20 -25
+		src/divine/server/DwiServer.java (1.5), "Exp", lines: +2 -0
+		src/divine/server/DwiSocket.java (1.6), "Exp", lines: +7 -5
+		src/divine/server/UserLoad.java (1.6), "Exp", lines: +3 -1
+
+	Added class SyntaxCheck
+	
+2005-03-07 11:46  xbrozek
+
+	Changed:
+		src/divine/client/Client.java (1.9), "Exp", lines: +24 -15
+
+	Switching the dialog between the state logged in/out moved to switchLogged().
+	
+2005-03-04 16:08  xforejt
+
+	Changed:
+		src/divine/common/Task.java (1.3), "Exp", lines: +83 -8
+		src/divine/server/DwiSocket.java (1.5), "Exp", lines: +28 -0
+		src/divine/server/UserLoad.java (1.5), "Exp", lines: +4 -0
+
+	added javadoc to some methods
+	
+2005-03-04 13:47  xforejt
+
+	Changed:
+		src/divine/client/Client.java (1.8), "Exp", lines: +4 -2
+
+	when wrong login, message box appears
+	
+2005-03-03 20:06  xbrozek
+
+	Changed:
+		src/divine/client/Client.form (1.4), "Exp", lines: +35 -7
+		src/divine/client/Client.java (1.7), "Exp", lines: +83 -36
+
+	Completed logging interface.
+	
+2005-03-03 17:25  xforejt
+
+	Changed:
+		src/divine/client/Client.java (1.6), "Exp", lines: +5 -4
+		src/divine/server/DwiServer.java (1.4), "Exp", lines: +1 -1
+		src/divine/server/DwiSocket.java (1.4), "Exp", lines: +11 -6
+		src/divine/server/UserLoad.java (1.4), "Exp", lines: +1 -1
+
+	minor changes in Client, debugging text in server, first attempt for login
+	
+2005-03-03 16:47  xforejt
+
+	Added:
+		src/dom4j-1.4.jar (1.1)
+		src/divine/common/ProgramArgument.java (1.1)
+	Changed:
+		src/divine/server/DwiServer.java (1.3), "Exp", lines: +5 -4
+		src/divine/server/DwiSocket.java (1.3), "Exp", lines: +4 -0
+		src/divine/server/UserLoad.java (1.3), "Exp", lines: +23 -4
+
+	users are loaded from xml file.
+	One missing class added
+	
+2005-03-03 14:40  xbrozek
+
+	Changed:
+		src/divine/client/Client.form (1.3), "Exp", lines: +51 -8
+		src/divine/client/Client.java (1.5), "Exp", lines: +56 -26
+
+	Dialog with server was written instead of monolog.
+	
+2005-03-03 08:48  xbrozek
+
+	Changed:
+		src/divine/client/Client.java (1.4), "Exp", lines: +1 -2
+
+	Fixied logging bug.
+	
+2005-03-03 07:53  xbrozek
+
+	Changed:
+		src/divine/client/Client.java (1.3), "Exp", lines: +5 -1
+
+	Test implementation of logging.
+	
+2005-03-02 19:45  xforejt
+
+	Deleted:
+		src/divine/server/ProgramArgument.java (1.2)
+		src/divine/server/User.java (1.2)
+	Added:
+		src/divine/common/User.java (1.1)
+	Changed:
+		src/divine/common/Task.java (1.2), "Exp", lines: +36 -5
+		src/divine/server/DwiServer.java (1.2), "Exp", lines: +4 -0
+		src/divine/server/DwiSocket.java (1.2), "Exp", lines: +85 -7
+		src/divine/server/UserLoad.java (1.2), "Exp", lines: +1 -0
+
+	Moved some files
+	Some changes -- not important to list them here as nothing works yet :-)
+	
+2005-03-02 19:41  xbrozek
+
+	Changed:
+		src/divine/client/Client.form (1.2), "Exp", lines: +65 -7
+		src/divine/client/Client.java (1.2), "Exp", lines: +62 -27
+
+	The main frame design was set up and the login procedure was written.
+	
+2005-03-02 18:27  xforejt
+
+	Changed:
+		src/divine/client/Client.form (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/client/Client.java (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/common/Task.java (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/server/DwiServer.java (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/server/DwiSocket.java (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/server/ProgramArgument.java (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/server/User.java (1.1.1.1), "Exp", lines: +0 -0
+		src/divine/server/UserLoad.java (1.1.1.1), "Exp", lines: +0 -0
+
+	DWI added to repository
+	
+2005-03-02 18:27  xforejt
+
+	Added:
+		src/divine/client/Client.form (1.1)
+		src/divine/client/Client.java (1.1)
+		src/divine/common/Task.java (1.1)
+		src/divine/server/DwiServer.java (1.1)
+		src/divine/server/DwiSocket.java (1.1)
+		src/divine/server/ProgramArgument.java (1.1)
+		src/divine/server/User.java (1.1)
+		src/divine/server/UserLoad.java (1.1)
+
+	Initial revision
+	

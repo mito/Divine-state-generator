@@ -1,0 +1,27 @@
+Explicit OWCTY: executable: owcty
+Explicit OWCTY: description: Explicit OWCTY
+Explicit OWCTY: needs-property: yes
+OWCTY Reversed: executable: owcty_reversed
+OWCTY Reversed: description: OWCTY Reversed
+OWCTY Reversed: needs-property: yes
+Negative Cycle: executable: negative_cycle_detection
+Negative Cycle: description: Negative Cycle Detection
+Negative Cycle: needs-property: yes
+Property Driven NDFS: executable: property_driven_ndfs
+Property Driven NDFS: description: Property Driven Nested DFS
+Property Driven NDFS: needs-property: yes
+BL-Edge: executable: bledge
+BL-Edge: description: Back Level Edge Based Cycle Detection
+BL-Edge: needs-property: yes
+BL-Edge: short: BL-Edge
+Reachability: executable: distr_reachability
+Reachability: description: Distributed Reachability
+Reachability: needs-property: no
+Token Based NDFS: executable: token_based_ndfs
+Token Based NDFS: description: Token Based Nested DFS
+Token Based NDFS: needs-property: yes
+Token Based NDFS: short: Token Based NDFS
+MAP: executable: distr_map
+MAP: description: Maximal Accepting Predecessor
+MAP: needs-property: yes
+MAP: short: MAP

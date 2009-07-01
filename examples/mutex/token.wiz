@@ -1,0 +1,7 @@
+#FILE
+simple_token_ring.mdve
+#PARAMETERS
+N in 6, 8, 10
+#COMMANDS
+generate -s
+//reachability size

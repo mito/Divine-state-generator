@@ -1,0 +1,20 @@
+
+ Mutual exclusion examples
+
+all models are 'standarized' they have processes P_0, P_1, ... P_(n-1); which
+have nodes NCS, wait, CS
+
+nonparametrized:
+- peterson (basic pet. protocol for 2 processes)
+
+parametrized (for N processes, parameter LOOPS (0/1) says whether there should be loops in NCS):
+
+- simple_token_ring
+- peterson
+- fischer (discrete time emulation of a real time protocol)
+
+
+Properties:
+- reachability: mutual exclusion between P_0, P_1 in CS; OK everywhere
+- LTL: response (wait => CS), infinitely many CS
+	depends on whether we allow selfloops and whether we use fair MC

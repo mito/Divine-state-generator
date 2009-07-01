@@ -1,0 +1,9 @@
+{
+{ F a }
+a := user.happy;
+}
+
+{
+{ F a }
+a := user.sad;
+}

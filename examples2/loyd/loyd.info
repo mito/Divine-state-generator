@@ -1,0 +1,26 @@
+The "15 puzzle" is a sliding square puzzle introduced by Sam Loyd in 1878. 
+It consists of 15 squares numbered from 1 to 15 which are placed in a box 
+leaving one position out of the 16 empty. The goal is to reposition the 
+squares from a given arbitrary starting arrangement by sliding them one 
+at a time into a configuration, where the squares are ordered by their
+numbers. For more details see:
+http://mathworld.wolfram.com/15Puzzle.html.
+
+@Article{	  joh79,
+  author	= "William Woolsey Johnson and William E. Story",
+  title		= "Notes on the 15-puzzle",
+  volume	= 2,
+  journal	= "American Journal of Mathematics",
+  year		= 1879,
+  pages		= "397--404"
+}
+
+---------------------------------------------------------------------------
+Our model stores the "state" of the puzzle in a global array named a,
+current position of the empty square is stored in global variables x and y,
+numbered from upper-left corner, the coordinates of which are (0, 0).
+Process P then "executes" the moves, one transition corresponds to one move.
+Our model allows to adjust the size of the puzzle to n x m for arbitrary
+natural numbers n and m. However, the LTL formulas refer only to the original
+4 x 4 version.
+

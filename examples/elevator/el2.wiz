@@ -1,0 +1,16 @@
+#FILE
+el2.mdve
+#PARAMETERS
+Floors=3; Strategy in 0,1
+#OPTIONS
+show trails current Person_0.state Person_1.state
+//ltl on-the-fly
+#PROPOSITIONS
+p1w	state	Person_1.waiting
+p1e	state	Person_1.in_elevator
+p1o	state	Person_1.out
+#COMMANDS
+reachability all
+draw model
+LTL G (p1w -> F p1e)
+LTL G (p1e -> F p1o)

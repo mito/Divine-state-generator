@@ -1,0 +1,51 @@
+BINPREFIX = divine.
+
+# DiVinE's include directory
+AM_CPPFLAGS=-DNETBUFFERSIZE=$(NETBUFFERSIZE) -DDIVINE_BINPREFIX=$(BINPREFIX) -DINSTALL_PREFIX=$(prefix) -I $(top_srcdir)/src $(MCRL2CFLAGS)
+AM_LDFLAGS=$(MCRL2LDFLAGS)
+
+SEVINE_LIB=$(top_srcdir)/lib/libsevine.a $(MCRL2LIBS)
+DIVINE_LIB=$(top_srcdir)/lib/libdivine.a $(MCRL2LIBS)
+PROMELA_LIB=$(top_srcdir)/lib/libbymoc_vm.a
+TOP_PATH=$(abs_top_srcdir)
+
+pkgjardir=$(pkgdatadir)/jar
+pkgstoredir=$(pkgdatadir)/store
+pkgimagesdir=$(pkgdatadir)/images
+
+if FORCE_CVS_STYLE_COMPILATION
+  CXXFLAGS+=$(DEFAULT_CXXFLAGS) $(DEBUG_YES_CXXFLAGS) -ldl -fPIC
+  CPPFLAGS+=$(DEFAULT_CPPFLAGS) $(CHECKS_SLOW_CPPFLAGS) $(DEBUG_YES_CPPFLAGS)
+else
+  CXXFLAGS+=$(CUSTOM_CXXFLAGS) -ldl -fPIC
+  CPPFLAGS+=$(CUSTOM_CPPFLAGS) 
+endif
+
+if CVSDATAPATH
+  M4_DEFS_PATH=$(TOP_PATH)/tool/model_manipulation
+  PERL_MODULES_PATH=$(TOP_PATH)/tool/model_manipulation
+  PROMELA_TRANSLATOR_JAR_PATH=$(TOP_PATH)/tool/model_manipulation/jar
+  DWI_JAR_PATH=$(TOP_PATH)/dwi/
+  DWI_IMAGE_PATH=$(TOP_PATH)/dwi/images
+  DWI_SETTINGS_PATH=$(TOP_PATH)/dwi/store
+else
+  M4_DEFS_PATH=$(pkgdatadir)
+  PERL_MODULES_PATH=$(pkgdatadir)
+  PROMELA_TRANSLATOR_JAR_PATH=$(pkgjardir)
+  DWI_JAR_PATH=$(pkgjardir)/
+  DWI_IMAGE_PATH=$(pkgimagesdir)
+  DWI_SETTINGS_PATH=$(pkgdatadir)/store
+endif
+
+COMMON_SUBSTITUTIONS=sed -e 's,[@]TOP_PATH[@],$(TOP_PATH),g; \
+                             s,[@]BINPREFIX[@],$(BINPREFIX),g; \
+                             s,[@]PERL_MODULES_PATH[@],$(PERL_MODULES_PATH),g; \
+			     s,[@]DWI_SETTINGS_PATH[@],$(DWI_SETTINGS_PATH),g; \
+			     s,[@]DWI_JAR_PATH[@],$(DWI_JAR_PATH),g; \
+			     s,[@]DWI_IMAGE_PATH[@],$(DWI_IMAGE_PATH),g; \
+                             s,[@]PROMELA_TRANSLATOR_JAR_PATH[@],$(PROMELA_TRANSLATOR_JAR_PATH),g; \
+                             s,[@]M4_DEFS_PATH[@],$(M4_DEFS_PATH),g'
+					    
+docdir = $(datadir)/doc
+pkgdocdir = $(docdir)/$(PACKAGE)
+

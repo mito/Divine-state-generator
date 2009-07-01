@@ -1,0 +1,22 @@
+Atomic propositions
+-------------------
+#define elected (nr_leaders>0)
+#define oneleader (nr_leaders==1)
+#define noleader (nr_leaders==0)
+#define moreleaders (nr_leaders>1)
+
+
+Verified formulas
+-----------------
+(1) a leader is eventually elected
+#property F(elected)
+
+(2) eventually one leader holds true forever
+#property F(G(oneleader))
+
+(3) no leader until one leader
+#property (noleader U oneleader)
+
+(4) more leadears ellected eventually
+#property F(moreleaders)
+

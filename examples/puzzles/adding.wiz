@@ -1,0 +1,15 @@
+#FILE
+adding.mdve
+#PARAMETERS
+MAX = 15
+MAX = 40
+#OPTIONS
+//show trails c x1 x2
+#PROPOSITIONS
+a	state	c == 20
+b	state	c == 50
+#COMMANDS
+reachability a b
+//max a
+//min b
+//generate -s

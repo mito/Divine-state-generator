@@ -1,0 +1,19 @@
+
+Model of layer link protocol of the IEEE-1394
+
+according to article "Verification of the Link layer protocol of the IEEE-1394 serial bus (FireWire)" (Sighireanu, Matescu)
+
+manually translated from E-LOTOS (and description) to .mdve; with abstraction from data, header, ack. values
+
+parameters:
+N = number of nodes
+APPLICATION -- ruzne scenare:
+ 	0 - posle se jen jedna zprava
+	1 - kazdej posle jednu zpravu nasledujicimu
+	2 - neomezene posilani zprav
+
+properties:
+to add (problem, protoze oni je maji action based a to se prevadi docela spatne)
+
+Size:
+BIG

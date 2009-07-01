@@ -1,0 +1,37 @@
+Atomic propositions:
+====================
+Cab is requested at level n:
+  #define r0 (req[0]==1)
+  #define r1 (req[1]==1)
+  #define r2 (req[2]==1)
+
+Cab is at level n:
+  #define p0 (p==0)
+  #define p1 (p==1)
+  #define p2 (p==2)
+
+Cab is open: 
+  #define co (cabin.open)
+
+
+Verified formulas
+=================
+(1) If level 1 is requested, it is served eventually:
+  #property G(r1->(F(p1&&co)))
+
+(2) If level 1 is requested, it is served as soon as the cab passes 
+the level 1:
+  #property G(r1->(!p1U(p1U(p1&&co))))
+
+(3) If level n is requested, the cab passes the level without serving it 
+at most once:
+  #property G(r0->(!p0U(p0U(!p0U(p0U(p0&&co))))))
+  #property G(r1->(!p1U(p1U(!p1U(p1U(p1&&co))))))
+  #property G(r2->(!p2U(p2U(!p2U(p2U(p2&&co))))))
+
+(4) If level 1 or 2 is requested, the cab passes the level without serving 
+it at most once:
+  #property (G(r1->(!p1U(p1U(!p1U(p1U(p1&&co)))))) && G(r0->(!p0U(p0U(!p0U(p0U(p0&&co)))))))
+
+(5) The cab will remain at level 1 forever from some moment:
+  #property F(Gp1)

@@ -1,0 +1,10 @@
+#FILE
+cambridge.mdve
+#PARAMETERS
+//K in 3,5; LOSS in 0,1
+K = 3
+#OPTIONS
+show trails Sender.state Receiver.state
+#COMMANDS
+//generate -s
+reachability all

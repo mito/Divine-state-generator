@@ -1,0 +1,27 @@
+#/bin/bash
+if (($# <1))
+  then echo Missing parameters! 1>&2;
+  HELP="true"
+fi;
+
+if [[ $1 == "-h" || $HELP == "true" ]]
+ then
+	echo -----------------------------------------------------------------
+	echo DiVinE Tool Set
+	echo -----------------------------------------------------------------
+	echo divine.draw_state_space 1.0  \(2005/06/02 09:37\)
+	echo -----------------------------------------------------------------
+	echo divine.draw_state_space takes a dve file and tries to show 
+	echo state space of the model specified in the dve file using
+	echo ghostview. To show the state space, divine.draw_state_space 
+	echo calls divine.predot, dot and gv. All switches passed 
+	echo to divine.draw_state_space are forwarded to divine.predot.
+	echo
+	echo "Usage: divine.draw_state_space [switches] file.dve"
+	echo 
+	divine.predot -h
+        exit;
+fi;
+divine.predot $1 $2 $3 $4 $5 $6 $7 $8 $9 | dot -Tps >temp.$$.ps
+gv temp.$$.ps
+rm -f temp.$$.ps
