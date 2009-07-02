@@ -32,6 +32,8 @@ PATH: /usr/bin
 PATH: /bin
 PATH: /usr/bin/X11
 PATH: /usr/games
+PATH: /home/morszag/Desktop/tools/git-1.6.3.3
+PATH: /home/morszag/Desktop/tools/jdk1.6.0_14/bin
 
 
 ## ----------- ##
@@ -62,6 +64,8 @@ configure:2323: $? = 0
 configure:2363: tardir=conftest.dir && eval tar --format=posix -chf - "$tardir" >conftest.tar
 configure:2366: $? = 0
 configure:2370: tar -xf - <conftest.tar
+tar: conftest.dir/file: time stamp 2009-07-01 15:43:05 is 3.593043165 s in the future
+tar: conftest.dir: time stamp 2009-07-01 15:43:05 is 3.592645427 s in the future
 configure:2373: $? = 0
 configure:2386: result: gnutar
 configure:2455: checking for g++
@@ -561,8 +565,8 @@ configure:9998: checking for cmpic++
 configure:10028: result: no
 configure:10043: checking for MPI_Init
 configure:10099: g++ -o conftest -g -O2   conftest.cpp  >&5
-/tmp/ccu8enHm.o: In function `main':
-/home/morszag/Desktop/divine-cluster-0.8.2/conftest.cpp:74: undefined reference to `MPI_Init'
+/tmp/ccuUfuBs.o: In function `main':
+/home/morszag/Desktop/tools/divine-cluster-0.8.2/conftest.cpp:74: undefined reference to `MPI_Init'
 collect2: ld returned 1 exit status
 configure:10105: $? = 1
 configure: failed program was:
@@ -919,6 +923,7 @@ config.status:740: creating dwi/Makefile
 config.status:931: executing depfiles commands
 config.status:931: executing src/divine-int.hh commands
 config.status:1063: creating src/divine-int.hh : _DIVINE_CLUSTER_SRC_DIVINE_INT_HH
+config.status:1495: src/divine-int.hh is unchanged
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -1030,15 +1035,15 @@ am_cv_prog_tar_pax=gnutar
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/missing --run aclocal-1.10'
+ACLOCAL='${SHELL} /home/morszag/Desktop/tools/divine-cluster-0.8.2/support/src/makeutils/missing --run aclocal-1.10'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
-AMTAR='${SHELL} /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/missing --run tar'
+AMTAR='${SHELL} /home/morszag/Desktop/tools/divine-cluster-0.8.2/support/src/makeutils/missing --run tar'
 ANT=''
-AUTOCONF='${SHELL} /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/missing --run autoconf'
-AUTOHEADER='${SHELL} /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/missing --run autoheader'
-AUTOMAKE='${SHELL} /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/missing --run automake-1.10'
+AUTOCONF='${SHELL} /home/morszag/Desktop/tools/divine-cluster-0.8.2/support/src/makeutils/missing --run autoconf'
+AUTOHEADER='${SHELL} /home/morszag/Desktop/tools/divine-cluster-0.8.2/support/src/makeutils/missing --run autoheader'
+AUTOMAKE='/usr/bin/automake'
 AWK='gawk'
 BUILDSUPPORT_FALSE=''
 BUILDSUPPORT_TRUE='#'
@@ -1101,7 +1106,7 @@ LEX_OUTPUT_ROOT=''
 LIBOBJS=''
 LIBS=''
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/missing --run makeinfo'
+MAKEINFO='${SHELL} /home/morszag/Desktop/tools/divine-cluster-0.8.2/support/src/makeutils/missing --run makeinfo'
 MCRL2CFLAGS=''
 MCRL2LDFLAGS=''
 MCRL2LIBS=''
@@ -1148,7 +1153,7 @@ host_alias=''
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='$(SHELL) /home/morszag/Desktop/divine-cluster-0.8.2/support/src/makeutils/install-sh'
+install_sh='$(SHELL) /home/morszag/Desktop/tools/divine-cluster-0.8.2/support/src/makeutils/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'
