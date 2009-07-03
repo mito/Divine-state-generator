@@ -57,31 +57,33 @@ int main(int argc, char **argv)
 
     state_t state;
     if (argc == 2) {
-        //state = sys->get_initial_state();
-        char data[7];
-        (*((sshort_int_t *)(&((byte_t *)(data))[0]))) = 1;
-        (*((sshort_int_t *)(&((byte_t *)(data))[1]))) = 0;
-        (*((sshort_int_t *)(&((byte_t *)(data))[2]))) = 0;
-        (*((sshort_int_t *)(&((byte_t *)(data))[3]))) = 0;
-        (*((sshort_int_t *)(&((byte_t *)(data))[4]))) = 0;
-        (*((sshort_int_t *)(&((byte_t *)(data))[5]))) = 0;
-        (*((sshort_int_t *)(&((byte_t *)(data))[6]))) = 0;
-        (*((sshort_int_t *)(&((byte_t *)(data))[7]))) = -18688; 
 
-        state = new_state (data, 7);
+        state = sys->get_initial_state();
         for (int i = 0; i < state.size; i++) {
             cout << (*((sshort_int_t *)(&((byte_t *)(state.ptr))[i]))) << ',';
         }
         cout << endl;
-        cout << "size: " << state.size << endl;
-        cout <<*(int *) state.ptr << endl;
-        print_state(state, 0);
-        cout << endl;
 
+       
+    } else {
+        cout << argv[2];
+
+        sshort_int_t *sshort_int_t = argv[2];
+        char *data;
+
+        for (int i = 0; i < sizeof(sshort_int_t); i++) {
+            (*((sshort_int_t *)(&((byte_t *)(data))[i]))) = sshort_int_t[i]; 
+        }
+
+        state = new_state(data, sizeof(data));
         int succs_result;
         succ_container_t succs(*sys);
         succs_result = sys->get_succs(state,succs);	
 
+        for (int i = 0; i < state.size; i++) {
+            cout << (*((sshort_int_t *)(&((byte_t *)(state.ptr))[i]))) << ',';
+        }
+        cout << "result: " << succs_result;
         for (std::size_t info_index=0; info_index!=succs.size(); info_index++) {
             //sys.DBG_print_state(succs[info_index],cout,16);
             cout << endl <<"1st successors" << endl;
@@ -92,40 +94,7 @@ int main(int argc, char **argv)
             cout << *(int *)succs[info_index].ptr << endl;
             print_state(succs[info_index], 0);
             cout << endl;
-
-            int succs_result_1;
-            succ_container_t succs_1(*sys);
-            succs_result_1 = sys->get_succs(succs[info_index],succs_1);	
-
-            for (std::size_t i=0; i!=succs_1.size(); i++) {
-                cout << endl <<"2nd successors" << endl;
-                for (int j = 0; j < state.size; j++) {
-                    cout << (*((sshort_int_t *)(&((byte_t *)(succs_1[i].ptr))[j]))) << ',';
-                }
-                cout << endl;
-                cout << *(int *)succs_1[i].ptr << endl;
-                print_state(succs_1[i], 0);
-                cout << endl;
-            }
         }
-       
-    } else {
-        char statevalue[] = "1000011";         
-        state = new_state(&statevalue[0], sizeof(statevalue));
-        print_state(state, 0);
-
-        //int succs_result;
-        //succ_container_t succs(*sys);
-        //succs_result = sys->get_succs(state,succs);	
-
-        //for (std::size_t info_index=0; info_index!=succs.size(); info_index++) {
-            //print_state(state,0);
-            //cout <<"\"->\"";
-
-            ////sys.DBG_print_state(succs[info_index],cout,16);
-            //print_state(succs[info_index],0);
-            //cout <<"\"";
-        //}
     }
 
       
