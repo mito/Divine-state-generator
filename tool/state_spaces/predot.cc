@@ -25,6 +25,13 @@ void print_state(state_t state,int format)
       return;
 }
 
+void print_state2(state_t state) {
+    for (int i = 0; i < state.size; i++) {
+        cout << (*((int *)(&((byte_t *)(state.ptr))[i]))) << ',';
+    }
+    cout << endl;
+}
+
 
 int main(int argc, char **argv)
 {
@@ -59,16 +66,12 @@ int main(int argc, char **argv)
     if (argc == 2) {
 
         state = sys->get_initial_state();
-        for (int i = 0; i < state.size; i++) {
-            cout << (*((int *)(&((byte_t *)(state.ptr))[i]))) << ',';
-        }
-        cout << endl;
-
+        print_state2(state);
        
     } else {
         state = sys->get_initial_state();
-        cout << argv[2] << endl;;
-        cout << strlen(argv[2]) << endl; 
+        //cout << argv[2] << endl;;
+        //cout << strlen(argv[2]) << endl; 
 
         int size = 0;
 
@@ -79,13 +82,13 @@ int main(int argc, char **argv)
         }
 
         string str;
-        cout << size << endl;
+        //cout << size << endl;
         char data[size]; 
         int pos = 0;
         int value;
         for (int i = 0; i < strlen(argv[2]); i++) {
             if (argv[2][i] == ',') {
-                cout << str << endl;    
+                //cout << str << endl;    
                 value = atoi(str.c_str());
                 (*((int *)(&((byte_t *)(data))[pos]))) = value;
                 pos++;
@@ -95,46 +98,15 @@ int main(int argc, char **argv)
             }
         }
 
-        for (int i = 0; i < state.size; i++) {
-            cout << (*((int *)(&((byte_t *)(state.ptr))[i]))) << ',';
+        state = new_state(data, sizeof(data));
+
+        int succs_result;
+        succ_container_t succs(*sys);
+        succs_result = sys->get_succs(state,succs);	
+
+        for (std::size_t info_index=0; info_index!=succs.size(); info_index++) {
+            print_state2(succs[info_index]);
         }
-        cout << endl;
-        for (int i = 0; i < state.size; i++) {
-            cout << (*((int *)(&((byte_t *)(data))[i]))) << ',';
-        }
-        cout << endl;
-
-        //for (int i; i < strlen(state.ptr); i++) {
-            //if (data[i] != state.ptr[i]) {
-                //cout << "Error!";
-            //} else {
-                //cout << "ok!";
-            //}
-        //}
-        //for (int i = 0; i < sizeof(sshort_int_t); i++) {
-            //(*((sshort_int_t *)(&((byte_t *)(data))[i]))) = sshort_int_t[i]; 
-        //}
-
-        //state = new_state(data, sizeof(data));
-        //int succs_result;
-        //succ_container_t succs(*sys);
-        //succs_result = sys->get_succs(state,succs);	
-
-        //for (int i = 0; i < state.size; i++) {
-            //cout << (*((sshort_int_t *)(&((byte_t *)(state.ptr))[i]))) << ',';
-        //}
-        //cout << "result: " << succs_result;
-        //for (std::size_t info_index=0; info_index!=succs.size(); info_index++) {
-            ////sys.DBG_print_state(succs[info_index],cout,16);
-            //cout << endl <<"1st successors" << endl;
-            //for (int i = 0; i < state.size; i++) {
-                //cout << (*((sshort_int_t *)(&((byte_t *)(succs[info_index].ptr))[i]))) << ',';
-            //}
-            //cout << endl;
-            //cout << *(int *)succs[info_index].ptr << endl;
-            //print_state(succs[info_index], 0);
-            //cout << endl;
-        //}
     }
 
       
